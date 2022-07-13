@@ -1,4 +1,122 @@
 body {
     margin:0;
     padding:0;
+    font-family: 'Montserrat', sans-serif;
+    padding-left:300px;
+    //transition: padding 0.2s ease-in-out;
+    @media (max-width: 768px) {
+        padding-left:0;
+    }
+    &.no-padding {
+        padding-left:0!important;
+    }
+}
+
+a {
+    text-decoration:none;
+    color:#141414;
+    &:hover {
+        color:#0a0a0a;
+    }
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+.fade-enter-active, .fade-leave-active { transition: opacity .5s; }
+.fade-enter, .fade-leave-active { opacity: 0; }
+
+.sidebar {
+    background-color:#141414;
+    display:block;
+    height:100vh;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    width:300px;
+    transition:transform 0.2s ease-in-out;
+    .sidebar-title {
+        display:block;
+        color:white;
+        padding:30px 0;
+    }
+    .sidebar-content {
+        padding:0 20px;
+        a {
+            display:flex;
+            align-items:center;
+            color:rgb(224, 224, 224);
+            background-color:none;
+            padding:10px 14px;
+            border-radius:6px;
+            transition:all .2s ease-in-out;
+            position:relative;
+            margin-bottom:4px;
+            font-weight:600;
+            line-height:16px;
+            span, i {
+                z-index:2;
+            }
+            i {
+                margin-right:12px;
+            }
+            .msg-count {
+                margin-left:auto;
+                font-size:12px;
+                padding:2px 8px;
+                border-radius:10px;
+                background-color:#222222;
+
+            }
+            &:before {
+                position:absolute;
+                content:"";
+                top:0;
+                right:0;
+                bottom:0;
+                left:0;
+                height:100%;
+                width:100%;
+                border-radius:4px;
+                background-color:#222222;
+                visibility:hidden;
+                transition:all .2s;
+                transform:scale(0.9);
+                opacity:0;
+                z-index:1;
+            }
+            &:hover {
+                color:white;
+                &:before {
+                    visibility:visible;
+                    opacity:1;
+                    transform:scale(1);
+                }
+            }
+        }
+        .sidebar-group-title {
+            color:gray;
+            display:block;
+            padding:0 14px;
+            margin-bottom:10px;
+            margin-top:30px;
+            font-size:12px;
+            text-transform:uppercase;
+            &:first-child {
+                margin-top:0!important;
+            }
+        }
+    }
+    @media (max-width: 768px) {
+        transform:translateX(-100%);
+        width:100vw;
+        height:auto;
+    }
+}
+
+input {
+    font-family:inherit;
+    font-size:14px;
 }

@@ -1,25 +1,13 @@
 <template>
-    <div>
-        <Button label="Submit">
-            123
-        </Button>
+    <div class="home-page">
+        <h2 class="mt-0">Welcome to ClassRoomMates!</h2>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut tempore eius asperiores voluptatum est? Consequuntur veniam pariatur omnis eaque. Hic possimus ea facere assumenda alias rem officia, voluptatem aut adipisci!</p>
     </div>
 </template>
 
 <script>
-    import Sidebar from 'primevue/sidebar';
-    import Button from 'primevue/button';
-
     export default {
-        components: {
-            Sidebar, Button
-        },
         name: 'IndexPage',
-
-        data () {
-            return {
-                sidebar: true
-            }
-        }
+        layout: 'default'
     }
 </script>
