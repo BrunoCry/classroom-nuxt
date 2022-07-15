@@ -72,7 +72,7 @@ export const actions = {
         
         try {
             await client.apis.roomPost.deleteRoomPost({
-                room_post_id: roomPost.id
+                post_id: roomPost.id
             }, {
                 requestInterceptor: (request) => {
                     request.headers.Authorization = `Bearer ${accessToken}`
@@ -89,7 +89,7 @@ export const actions = {
 
         try {
             await client.apis.roomPost.attachFilesToRoomPost({
-                room_post_id: roomPostId
+                post_id: roomPostId
             }, {
                 requestInterceptor: (request) => {
                     request.headers.Authorization = `Bearer ${accessToken}`
@@ -105,7 +105,7 @@ export const actions = {
         const accessToken = localStorage.getItem('accessToken')
 
         try {
-            const response = await client.apis.roomPost.getRoomPost({room_post_id: roomPostId},
+            const response = await client.apis.roomPost.getRoomPost({post_id: roomPostId},
                 {
                     requestInterceptor: (request) => {
                         request.headers.Authorization = `Bearer ${accessToken}`
@@ -124,7 +124,7 @@ export const actions = {
         
         try {
             const response = await client.apis.roomPost.updateRoomPost({
-                room_post_id: roomPostId
+                post_id: roomPostId
             }, {
                 requestInterceptor: (request) => {
                     request.headers.Authorization = `Bearer ${accessToken}`

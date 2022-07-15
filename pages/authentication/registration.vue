@@ -23,7 +23,7 @@
                         <div class="mb-3">
                             <span class="p-input-icon-left d-block w-full">
                                 <i class="pi pi-phone" />
-                                <InputText type="text" v-model="form.phone" placeholder="Your phone" class="w-full" />
+                                <InputText type="text" v-model="form.phone_number" placeholder="Your phone" class="w-full" />
                             </span>
                             <span v-if="errors.phone_number" class="error text-red-400">{{ errors.phone_number }}</span>
                         </div>
@@ -69,8 +69,8 @@
                         </div>
                         <div class="mb-2">
                             <div class="field-checkbox">
-                                <Checkbox id="city1" name="city" value="Chicago" v-model="form.accept_eula" />
-                                <label for="city1">Accept <a class="text-primary">EULA</a></label>
+                                <Checkbox id="acceptEULA" v-model="form.accept_eula" :binary="true"/>
+                                <label for="acceptEULA">Accept <a class="text-primary">EULA</a></label>
                             </div>
                             <span v-if="errors.accept_eula" class="error text-red-400 mb-3">{{ errors.accept_eula }}</span>
                         </div>
@@ -127,7 +127,7 @@
                 await this.registerUser(this.form)
 
                 if(Object.keys(this.errors).length == 0) {
-                    alert('Registration Success!')
+                    this.$router.push({ name: 'login' })
                 }
             }
         }

@@ -1,1 +1,1 @@
-export const API_URL = 'http://classpace.xyz:8000'
+export const API_URL = 'http://localhost:8000'

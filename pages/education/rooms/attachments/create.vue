@@ -6,16 +6,13 @@
         </div>
         <div class="grid">
             <div class="col-12 xl:col-4">
-                {{ errors }}
-                <label class="text-sm mb-3 block">Type of attachment: <b>{{ $route.query.type }}</b></label>
+                <label class="text-sm mb-3 block">Type of post: <b>{{ $route.query.type }}</b></label>
                 <div class="mb-3">
-                    <InputText v-model="form.title" placeholder="Title of room" class="block w-full" />
+                    <InputText v-model="form.title" placeholder="Title of post" class="block w-full" />
                     <span class="text-sm text-red-400" v-if="errors.title">{{ errors.title }}</span>
                 </div>
-                <InputText v-model="form.text" placeholder="Text of room" class="block w-full mb-3" />
-                <Textarea v-model="form.description" placeholder="Description of room" autoresize="true" class="block w-full mb-3" rows="6" />
-                <Control />
-                <List />
+                <InputText v-model="form.description" placeholder="Description of post" class="block w-full mb-3" />
+                <Textarea v-model="form.text" placeholder="Text of room" autoresize="true" class="block w-full mb-3" rows="6" />
                 <Button @click.prevent="createAttachment()" class="mt-3">Create attachment</Button>
             </div>
         </div>
