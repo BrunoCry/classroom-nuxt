@@ -15,7 +15,7 @@ const routes = [
         { path: 'show/:id', name: 'rooms.show', component: page('education/rooms/room.vue') },
         { path: 'edit/:id', name: 'rooms.edit', component: page('education/rooms/edit.vue') },
         { path: 'join/:link', name: 'rooms.join', component: page('education/rooms/join.vue') },
-        { path: 'add-attachment/:id', name: 'rooms.add.attachment', component: page('education/rooms/attachments/create.vue') }
+        { path: 'add-attachment/:id', name: 'rooms.add.attachment', component: page('education/rooms/posts/create.vue') }
     ] },
     { path: '/dialogs', component: page('education/dialogs/layout.vue'), children: [
         { path: '/', name: 'dialogs.list', component: page('education/dialogs/preview.vue') },

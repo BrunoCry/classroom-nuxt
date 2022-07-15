@@ -3,20 +3,24 @@
         <sidebar />
         <div class="container p-5">
             <transition name="fade">
-                <Nuxt />
+                <div>
+                    <Toast />
+                    <Nuxt />
+                </div>
             </transition>
         </div>
     </div>
 </template>
 
 <script>
-    import Sidebar from '@/components/Sidebar.vue'
+import Toast from 'primevue/toast';
+import Sidebar from '@/components/Sidebar.vue'
 
-    export default {
-        components: {
-            Sidebar
-        },
+export default {
+    components: {
+        Sidebar, Toast
+    },
 
-        name: 'DefaultLayout'
-    }
+    name: 'DefaultLayout'
+}
 </script>

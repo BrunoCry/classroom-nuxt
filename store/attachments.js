@@ -30,6 +30,32 @@ export const mutations = {
 }
 
 export const actions = {
+    async create({ commit }, { postId, assignmentId, attachments }) {
+        const client = await apiClient
+        const accessToken = localStorage.getItem('accessToken')
+        console.log(attachments)
+        
+        try {
+            const response = await client.apis.attachments.createAttachments({
+                post_id: postId,
+                assignment_id: assignmentId,
+            }, {
+                requestInterceptor: (request) => {
+                    request.headers.Authorization = `Bearer ${accessToken}`
+                },
+                requestBody: {
+                    attachments: attachments,
+                }
+            })
+            commit('SET_ITEM', response.data)
+            commit('SET_ERRORS', {})
+        } catch (e) {
+            console.error(e)
+            commit('SET_ERRORS', e.response.body.detail)
+
+        }
+    },
+
     async get({ commit }, attachmentId) {
         const client = await apiClient
         const accessToken = localStorage.getItem('accessToken')

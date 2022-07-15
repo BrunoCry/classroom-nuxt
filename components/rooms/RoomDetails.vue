@@ -1,7 +1,6 @@
 <template>
     <div>
         <ConfirmDialog />
-        <Toast />
         <div class="flex align-items-center mb-3">
             <NuxtLink to="/rooms">
                 <Button icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
@@ -68,12 +67,11 @@
     import InputText from 'primevue/inputtext';
     import Participants from './Participants.vue';
     import ConfirmDialog from 'primevue/confirmdialog';
-    import Toast from 'primevue/toast';
     import Attachments from './Attachments.vue';
 
     export default {
         components: {
-            Button, Divider, InputText, Participants, Menu, ConfirmDialog, Toast, Attachments
+            Button, Divider, InputText, Participants, Menu, ConfirmDialog, Attachments
         },
         computed: {
             ...mapGetters({
