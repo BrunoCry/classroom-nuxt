@@ -6,8 +6,8 @@
                 <Button icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
             </NuxtLink>
             <h2 class="my-0">Room: {{ room.name }}</h2>
-            <Button v-if="canModerate" type="button" label="Room manage" class="ml-auto" @click="toggleManageRoom" aria-haspopup="true" aria-controls="overlay_menu" />
-            <Menu v-if="canModerate" id="overlay_menu" ref="menu" :model="items" :popup="true" />
+            <Button v-if="currentParticipation.is_moderator" type="button" label="Room manage" class="ml-auto" @click="toggleManageRoom" aria-haspopup="true" aria-controls="overlay_menu" />
+            <Menu v-if="currentParticipation.is_moderator" id="overlay_menu" ref="menu" :model="items" :popup="true" />
         </div>
         <div class="grid">
             <div class="col-12 xl:col-8">
@@ -75,7 +75,6 @@
         },
         computed: {
             ...mapGetters({
-                canModerate: 'rooms/canModerate',
                 room: 'rooms/item',
                 currentUser: 'users/currentUser',
                 currentParticipation: 'participants/current',

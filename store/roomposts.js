@@ -101,13 +101,13 @@ export const actions = {
             console.error(e)
         }
     },
-    async update({ commit }, { roomPostId, requestBody }) {
+    async update({ commit }, { postId, requestBody }) {
         const client = await apiClient
         const accessToken = localStorage.getItem('accessToken')
         
         try {
             const response = await client.apis.roomPost.updateRoomPost({
-                post_id: roomPostId
+                post_id: postId
             }, {
                 requestInterceptor: (request) => {
                     request.headers.Authorization = `Bearer ${accessToken}`
