@@ -2,7 +2,7 @@
     <div class="attachments-add">
         <div class="flex align-items-center mb-3">
             <Button @click.prevent="back()" icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
-            <h2 class="my-0">Add attachment to room</h2>
+            <h2 class="my-0">Add post to room</h2>
         </div>
         <div class="grid">
             <div class="col-12 xl:col-5">
@@ -32,13 +32,11 @@ import FileUpload from 'primevue/fileupload';
 import InputText from 'primevue/inputtext'
 import Textarea from 'primevue/textarea'
 import { mapActions, mapGetters } from 'vuex'
-import List from '../../../../components/attachments/List.vue'
-import Control from '../../../../components/attachments/Control.vue'
 
 
 export default {
     components: {
-        Button, InputText, Textarea, List, Control, FileUpload,
+        Button, InputText, Textarea, FileUpload,
         Divider,
     },
 

@@ -24,7 +24,7 @@
             </div>
         </template>
         <template v-else>
-            <div v-for="member in participants.items" class="member flex align-items-center mb-3">
+            <div v-for="member in participants.items" class="member flex align-items-center mb-3" :key="member.id">
                 <Avatar :label="member.user.first_name.substring(0, 1)" class="mr-3" size="large" shape="circle" />
                 <div>
                     <h4 class="mt-0 mb-1">{{ member.user.first_name }} {{ member.user.last_name }}</h4>

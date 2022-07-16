@@ -83,23 +83,6 @@ export const actions = {
             console.error(e)
         }
     },
-    async attachFilesToRoomPost(context, { roomPostId, requestBody }) {
-        const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
-
-        try {
-            await client.apis.roomPost.attachFilesToRoomPost({
-                post_id: roomPostId
-            }, {
-                requestInterceptor: (request) => {
-                    request.headers.Authorization = `Bearer ${accessToken}`
-                },
-                requestBody: requestBody,
-            })
-        } catch (e) {
-            console.error(e.response.body)
-        }
-    },
     async get({ commit }, roomPostId) {
         const client = await apiClient
         const accessToken = localStorage.getItem('accessToken')

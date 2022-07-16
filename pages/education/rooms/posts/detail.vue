@@ -6,18 +6,18 @@
             </div>
         </template>
         <template v-else>
-            <RoomDetails />
+            <PostDetail />
         </template>
     </div>
 </template>
 
 <script>
-    import RoomDetails from '../../../components/rooms/RoomDetails.vue';
+    import PostDetail from '@/components/posts/PostDetail.vue';
     import ProgressSpinner from 'primevue/progressspinner';
 
     export default {
         components: {
-            RoomDetails, ProgressSpinner
+            PostDetail, ProgressSpinner
         },
 
         data () {
@@ -27,11 +27,15 @@
         },
 
         async created () {
-            const roomId = this.$route.params.id
-            await this.$store.dispatch('rooms/getRoom', roomId)
-            await this.$store.dispatch('users/getCurrentUser')
-            await this.$store.dispatch('roomposts/fetch', roomId)
+            const roomId = this.$route.params.roomId
+            const postId = this.$route.params.postId
+            await this.$store.dispatch('roomposts/get', postId)
             await this.$store.dispatch('participants/current', roomId)
+            await this.$store.dispatch('users/getCurrentUser')
+
+            const post = this.$store.getters['roomposts/item']
+
+            await this.$store.commit('attachments/SET_ITEMS', post.attachments)
 
             setTimeout(() => {
                 this.loading = false

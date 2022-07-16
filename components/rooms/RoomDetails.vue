@@ -24,27 +24,27 @@
                     </div>
                 </div>
                 <div class="flex">
-                    <Button v-if="canModerate" class="p-button-outlined">Show Homeworks (3)</Button>
+                    <Button v-if="currentParticipation.can_manage_assignments" class="p-button-outlined">Show Homeworks (3)</Button>
                 </div>
                 <Divider />
                 <div class="grid">
                     <div class="col-12 xl:col-6">
                         <div class="flex align-items-center">
                             <h3>Course materials</h3>
-                            <NuxtLink v-if="canModerate" :to="'/rooms/add-attachment/' + room.id + '?type=material'">
+                            <NuxtLink v-if="currentParticipation.can_manage_posts" :to="'/rooms/add-post/' + room.id + '?type=material'">
                                 <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2" v-tooltip.top="'Add materials'" />
                             </NuxtLink>
                         </div>
-                        <Attachments :type="'material'" />
+                        <PostList :type="'material'" />
                     </div>
                     <div class="col-12 xl:col-6">
                         <div class="flex align-items-center">
                             <h3>Homeworks</h3>
-                            <NuxtLink v-if="canModerate" :to="'/rooms/add-attachment/' + room.id + '?type=homework'">
+                            <NuxtLink v-if="currentParticipation.can_manage_posts" :to="'/rooms/add-post/' + room.id + '?type=homework'">
                                 <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2" v-tooltip.top="'Add homework'" />
                             </NuxtLink>
                         </div>
-                        <Attachments :type="'homework'" />
+                        <PostList :type="'homework'" />
                     </div>
                 </div>
             </div>
@@ -67,17 +67,18 @@
     import InputText from 'primevue/inputtext';
     import Participants from './Participants.vue';
     import ConfirmDialog from 'primevue/confirmdialog';
-    import Attachments from './Attachments.vue';
+    import PostList from './PostList.vue';
 
     export default {
         components: {
-            Button, Divider, InputText, Participants, Menu, ConfirmDialog, Attachments
+            Button, Divider, InputText, Participants, Menu, ConfirmDialog, PostList
         },
         computed: {
             ...mapGetters({
                 canModerate: 'rooms/canModerate',
                 room: 'rooms/item',
-                currentUser: 'users/currentUser'
+                currentUser: 'users/currentUser',
+                currentParticipation: 'participants/current',
             }),
             joinLink() {
                 return window.location.host + '/rooms/join/' + this.room.join_slug

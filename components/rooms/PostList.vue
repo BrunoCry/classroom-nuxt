@@ -1,6 +1,11 @@
 <template>
     <div class="attachments-block">
-        <NuxtLink to="/home" v-for="(item, key) in typedPosts" class="bg-white border-solid border-1 p-3 border-round-lg border-300 mb-4 block" :key="key">
+        <NuxtLink
+            :to="{name: 'rooms.post.detail', params: { postId: item.id, roomId: item.room_id } }"
+            v-for="(item, key) in typedPosts"
+            class="bg-white border-solid border-1 p-3 border-round-lg border-300 mb-4 block"
+            :key="key"
+        >
             <div class="flex align-items-center">
                 <i class="pi pi-file" style="font-size:1.8rem;margin-right:1.3rem"></i>
                 <div>
@@ -15,7 +20,7 @@
                 <span class="time text-gray-500">{{ item.created_at }}</span>
                 <span class="files ml-auto">{{ item.attachments_count }} files attached</span>
             </div>
-            <template v-if="canModerate">
+            <template v-if="currentParticipation.can_manage_posts">
                 <Divider />
                 <Button class="p-button-sm px-2 py-1">
                     <i class="pi pi-pencil mr-2" style="font-size:0.9rem"></i>
@@ -48,7 +53,8 @@
         computed: {
             ...mapGetters({
                 items: 'roomposts/items',
-                canModerate: 'rooms/canModerate'
+                canModerate: 'rooms/canModerate',
+                currentParticipation: 'participants/current',
             }),
 
             typedPosts() {
