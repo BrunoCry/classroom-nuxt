@@ -17,7 +17,7 @@
                     class="pi pi-times"
                     style="font-size:1.8rem;margin-right:1.3rem"
                 ></i>
-                <span> {{attachment.option.filename}} </span>
+                <span> {{attachment.option.filename || attachment.option.name }} </span>
             </div>
         </template> 
     </Listbox>

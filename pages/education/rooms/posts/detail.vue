@@ -29,6 +29,7 @@
         async created () {
             const roomId = this.$route.params.roomId
             const postId = this.$route.params.postId
+
             await this.$store.dispatch('roomposts/get', postId)
             await this.$store.dispatch('participants/current', roomId)
             await this.$store.dispatch('users/getCurrentUser')

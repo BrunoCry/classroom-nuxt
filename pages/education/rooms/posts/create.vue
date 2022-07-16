@@ -21,6 +21,13 @@
                 <FileUpload name="demo[]" :customUpload="true" @uploader="createAttachments" v-model="this.attachments" :multiple="true"/>
                 <Button @click.prevent="createPost()" class="mt-3">Create post</Button>
             </div>
+            <div class="col-12 xl:col-4">
+                <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
+                    <h3 class="my-0">Attached files</h3>
+                    <AttachmentList :editable="true" />
+                    <Divider />
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -32,12 +39,13 @@ import FileUpload from 'primevue/fileupload';
 import InputText from 'primevue/inputtext'
 import Textarea from 'primevue/textarea'
 import { mapActions, mapGetters } from 'vuex'
+import AttachmentList from '@/components/attachments/AttachmentList.vue'
 
 
 export default {
     components: {
         Button, InputText, Textarea, FileUpload,
-        Divider,
+        Divider, AttachmentList,
     },
 
     data () {
@@ -83,18 +91,26 @@ export default {
 
                 this.attachFiles({
                     postId: this.post.id,
-                    attachments: this.attachments,
+                    attachments: this.$store.getters['attachments/items'],
                 })
+                this.$store.commit('attachments/SET_ITEMS', [])
             }
         },
 
         async createAttachments(event) {
             this.attachments = this.attachments.concat(event.files)
+            let newAttachments = [...this.$store.getters['attachments/items']]
+
+            for(let i = 0; i < event.files.length; i++) {
+                newAttachments.push(event.files[i])
+            }
+
+            this.$store.commit('attachments/SET_ITEMS', newAttachments)
             this.$toast.add({
                 severity:'info',
                 summary:'Success',
-                detail:`Attachments added. Current added files: ${this.attachments.length}`,
-                life: 3000
+                detail:`Attachments added`,
+                life: 3000,
             })
         },
     }
