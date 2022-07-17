@@ -131,17 +131,13 @@ export const actions = {
         const client = await apiClient
         const accessToken = localStorage.getItem('accessToken')
         
-        try {
-            await client.apis.room.joinBySlug({
-                join_slug: joinSlug
-            }, {
-                requestInterceptor: (request) => {
-                    request.headers.Authorization = `Bearer ${accessToken}`
-                },
-            })
-            commit('SET_ERRORS', {})
-        } catch (e) {
-            console.error(e)
-        }
+        const response = await client.apis.room.joinBySlug({
+            join_slug: joinSlug
+        }, {
+            requestInterceptor: (request) => {
+                request.headers.Authorization = `Bearer ${accessToken}`
+            },
+        })
+        commit('SET_ERRORS', {})
     }
 }

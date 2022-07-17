@@ -3,10 +3,12 @@ import { apiClient } from "@/utils/api.js";
 
 export const namespaced = true;
 
-export const state = {
-    item: {},
-    items: [],
-    errors: {},
+export const state = () => {
+    return {
+        item: {},
+        items: [],
+        errors: {},
+    }
 }
 
 export const getters = {
