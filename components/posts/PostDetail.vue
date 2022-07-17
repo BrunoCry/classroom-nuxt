@@ -10,9 +10,20 @@
             <div class="col-12 xl:col-8">
                 <span class="text-sm mb-1 mt-3 block">Description:</span>
                 <p class="text-lg mt-0">{{ post.description }}</p>
-                <div class="flex">
-                    <Button v-if="currentParticipation.can_manage_assignments" class="p-button-outlined">Assigned Homeworks</Button>
-                    <Button v-else-if="currentParticipation.can_assign_homeworks && post.is_assignable" class="p-button-outlined">Assign</Button>
+                <div class="flex" v-if="post.is_assignable">
+                    <Button
+                        v-if="currentParticipation.can_manage_assignments"
+                        class="p-button-outlined"
+                        @click="goToPostAssignmentsList"
+                    >
+                        Assigned Homeworks ({{ post.assignments_count }})
+                    </Button>
+                    <Button
+                        v-else-if="currentParticipation.can_assign_homeworks"
+                        class="p-button-outlined"
+                    >
+                        Assign
+                    </Button>
                 </div>
                 <Divider />
                 <p class="text-lg mt-0">{{ post.text }}</p>
@@ -47,5 +58,12 @@
                 post: 'roomposts/item',
             }),
         },
+        methods: {
+            async goToPostAssignmentsList() {
+                this.$router.push({'name': 'rooms.assignments.list', query: {
+                    postId: this.post.id
+                }})
+            }
+        }
     }
 </script>
