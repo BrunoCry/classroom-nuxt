@@ -1,4 +1,5 @@
-import { apiClient } from "@/utils/api.js";
+import { apiClient } from "@/utils/api.js"
+import Cookies from 'js-cookie'
 
 export const namespaced = true;
 
@@ -61,7 +62,7 @@ export const actions = {
         try {
             var response = await client.apis.user.authenticateUser({}, {requestBody: requestBody })
             console.log(response.body.access_token)
-            localStorage.setItem('accessToken', response.body.access_token)
+            Cookies.set('token', token, { expires: requestBody.remember ? 365 : null })
             commit('SET_LOGIN_ERROR', undefined)
             console.log(response)
         } catch(e) {
@@ -104,7 +105,7 @@ export const actions = {
         }
     },
     logoutUser({ commit }) {
-        localStorage.removeItem('accessToken')
+        Cookies.remove('token')
         commit('LOGOUT_USER')
     }
 }
