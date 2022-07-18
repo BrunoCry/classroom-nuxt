@@ -120,3 +120,40 @@ input {
     font-family:inherit;
     font-size:14px;
 }
+
+.error-layout {
+    height:100vh;
+}
+
+.error-code {
+    font-size:160px;
+    text-align:right;
+    margin:0 40px 0 0;
+    line-height:120px;
+    background: #000000;
+    background: linear-gradient(to right, #000000 50%, #E0E0E0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    @media (max-width: 768px) {
+        text-align:center;
+        margin-right:0;
+        font-size:100px;
+    }
+}
+
+.error-oops {
+    font-size:48px;
+    margin-bottom:20px;
+    margin-top:0;
+    @media (max-width: 768px) {
+        font-size:30px;
+        margin-top:40px;
+    }
+}
+
+.error-page {
+    margin-top:200px;
+    @media (max-width: 768px) {
+        margin-top:40px;
+    }
+}
