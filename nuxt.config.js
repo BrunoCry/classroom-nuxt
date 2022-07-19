@@ -32,6 +32,10 @@ export default {
         { src: 'assets/scss/app.scss', lang: 'scss'}
     ],
 
+    router: {
+        middleware: ['check-auth']
+    },
+
     plugins: [
         'plugins/primevue'
     ],
