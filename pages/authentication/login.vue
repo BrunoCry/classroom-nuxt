@@ -20,7 +20,7 @@
                         </Divider>
                         <span class="p-input-icon-left d-block w-full">
                             <i class="pi pi-phone" />
-                            <InputText type="text" v-model="form.phone" placeholder="Your phone" class="w-full" />
+                            <InputText type="text" v-model="form.phone_number" placeholder="Your phone" class="w-full" />
                         </span>
                         <Divider align="center" type="dashed" class="text-sm">
                             <b>Your password</b>
@@ -29,6 +29,10 @@
                             <i class="pi pi-lock" />
                             <InputText type="password" v-model="form.password" placeholder="Type your password" class="w-full" />
                         </span>
+                        <div class="field-checkbox">
+                            <Checkbox id="remember" v-model="form.remember" :binary="true" />
+                            <label for="remember">Remember me</label>
+                        </div>
                         <Button @click.prevent="loginUser()" :loading="loading" class="w-full text-center block">Log In</Button>
                     </template>
                 </Card>
@@ -56,8 +60,9 @@
             return {
                 form: {
                     email: '',
-                    phone: '',
-                    password: ''
+                    phone_number: '',
+                    password: '',
+                    remember: false
                 },
                 loading: true
             }
@@ -76,13 +81,7 @@
             async loginUser() {
                 this.loading = true
 
-                const requestBody = {
-                    email: this.form.email,
-                    phone_number: this.form.phone,
-                    password: this.form.password,
-                }
-
-                await this.authenticateUser(requestBody)
+                await this.authenticateUser(this.form)
 
                 if(!this.error) {
                     this.$router.push({ 'name': 'profile' })

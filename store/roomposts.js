@@ -1,4 +1,5 @@
-import { apiClient } from "@/utils/api.js";
+import { apiClient } from "@/utils/api.js"
+import Cookies from 'js-cookie'
 
 export const namespaced = true;
 
@@ -35,7 +36,7 @@ export const mutations = {
 export const actions = {
     async create({ commit }, requestBody) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = Cookies.get('token')
         
         try {
             const response = await client.apis.roomPost.createRoomPost({}, {
@@ -53,7 +54,7 @@ export const actions = {
     },
     async fetch({ commit }, roomId) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = Cookies.get('token')
         
         try {
             const response = await client.apis.roomPost.getRoomPosts({room_id: roomId}, {
@@ -68,7 +69,7 @@ export const actions = {
     },
     async delete({ dispatch }, roomPost) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = Cookies.get('token')
         
         try {
             await client.apis.roomPost.deleteRoomPost({
@@ -85,7 +86,7 @@ export const actions = {
     },
     async get({ commit }, roomPostId) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = Cookies.get('token')
 
         try {
             const response = await client.apis.roomPost.getRoomPost({post_id: roomPostId},
@@ -103,7 +104,7 @@ export const actions = {
     },
     async update({ commit }, { postId, requestBody }) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = Cookies.get('token')
         
         try {
             const response = await client.apis.roomPost.updateRoomPost({
