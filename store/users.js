@@ -1,4 +1,5 @@
-import { apiClient } from "@/utils/api.js";
+import { apiClient } from '@/utils/api.js'
+import Cookies from 'js-cookie'
 
 export const namespaced = true;
 
@@ -20,6 +21,9 @@ export const getters = {
     loginError(state) {
         return state.loginError
     },
+    checkAuth(state) {
+        return state.currentUser !== undefined
+    }
 }
 
 export const mutations = {
@@ -56,21 +60,18 @@ export const actions = {
     },
     async authenticateUser({ commit }, requestBody) {
         const client = await apiClient
-        console.log(client)
 
         try {
             var response = await client.apis.user.authenticateUser({}, {requestBody: requestBody })
-            console.log(response.body.access_token)
-            localStorage.setItem('accessToken', response.body.access_token)
+            Cookies.set('token', response.body.access_token, { expires: requestBody.remember ? 365 : null })
             commit('SET_LOGIN_ERROR', undefined)
-            console.log(response)
         } catch(e) {
             commit('SET_LOGIN_ERROR', e.response.body.detail)
         }
     },
     async getCurrentUser({ commit }) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = Cookies.get('token')
 
         try {
             const response = await client.apis.user.currentUserInfo({}, {
@@ -81,12 +82,12 @@ export const actions = {
             commit('SET_CURRENT_USER', response.body)
         } catch (e) {
             alert('Not logged in!')
-            localStorage.removeItem('accessToken')
+            Cookies.remove('token')
         }
     },
     async updateUser({commit}, requestBody) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = Cookies.get('token')
         
         try {
             const response = await client.apis.authentication.updateCurrentUser({}, {
@@ -104,7 +105,7 @@ export const actions = {
         }
     },
     logoutUser({ commit }) {
-        localStorage.removeItem('accessToken')
+        Cookies.remove('token')
         commit('LOGOUT_USER')
     }
 }
