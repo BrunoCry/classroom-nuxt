@@ -9,6 +9,7 @@ export const state = () => ({
     registrationErrors: {},
     loginError: undefined,
     errors: {},
+    token: null
 })
 
 export const getters = {
@@ -23,6 +24,9 @@ export const getters = {
     },
     checkAuth(state) {
         return state.currentUser !== undefined
+    },
+    token(state) {
+        return state.token
     }
 }
 
@@ -41,6 +45,10 @@ export const mutations = {
     },
     LOGOUT_USER(state) {
         state.currentUser = undefined
+        state.token = null
+    },
+    SET_ACCESS_TOKEN(state, item) {
+        state.token = item
     }
 }
 
@@ -63,7 +71,8 @@ export const actions = {
 
         try {
             var response = await client.apis.user.authenticateUser({}, {requestBody: requestBody })
-            Cookies.set('token', response.body.access_token, { expires: requestBody.remember ? 365 : null })
+            Cookies.set('token', response.body.access_token)
+            commit('SET_ACCESS_TOKEN', response.body.access_token)
             commit('SET_LOGIN_ERROR', undefined)
         } catch(e) {
             commit('SET_LOGIN_ERROR', e.response.body.detail)

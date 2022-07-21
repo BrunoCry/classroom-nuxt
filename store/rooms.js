@@ -1,4 +1,5 @@
-import { apiClient } from "@/utils/api.js";
+import { apiClient } from '@/utils/api.js'
+import Cookies from 'js-cookie'
 
 export const namespaced = true;
 

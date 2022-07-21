@@ -3,6 +3,9 @@ require('dotenv').config()
 export default {
     srcDir: __dirname,
 
+    ssr: true,
+    target: 'server',
+
     head: {
         title: 'ClassRoom',
         htmlAttrs: {
@@ -53,5 +56,11 @@ export default {
 
     build: {
         transpile: ['primevue'],
+    },
+
+    // настройка сервера для запуска nuxt в локальной сети, убрать на деплое
+    server: {
+        port: 8000,  
+        host: '0.0.0.0'
     }
 }
