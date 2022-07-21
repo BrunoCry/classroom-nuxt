@@ -40,7 +40,8 @@ export default {
     },
 
     plugins: [
-        'plugins/primevue'
+        'plugins/primevue',
+        'plugins/i18n'
     ],
 
     components: true,

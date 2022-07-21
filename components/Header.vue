@@ -6,11 +6,11 @@
                 <InputText type="text" class="py-2" placeholder="Search" />
             </span>
             <div v-if="user != undefined" class="right-header ml-auto">
-                <a href="#" @click.prevent="toggle_menu" class="flex align-items-center user-info" aria-haspopup="true" aria-controls="header_menu">
+                <NuxtLink to="/profile" class="flex align-items-center user-info">
                     <Avatar label="D" shape="circle" class="mr-2" />
                     <b>{{ user.first_name }} {{ user.last_name }}</b>
                     <i class="pi pi-chevron-down ml-2"></i>
-                </a>
+                </NuxtLink>
             </div>
             <div v-else class="right-header ml-auto">
                 <NuxtLink to="/login">

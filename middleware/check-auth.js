@@ -4,6 +4,10 @@ export default async ({ store, req }) => {
     const token = Cookies.get('token')
 
     if (!store.getters['users/checkAuth'] && token) {
-        await store.dispatch('users/getCurrentUser')
+        try {
+            await store.dispatch('users/getCurrentUser')
+        } catch (e) {
+            console.error(e)
+        }
     }
 }
