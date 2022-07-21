@@ -11,7 +11,6 @@
                     <b>{{ user.first_name }} {{ user.last_name }}</b>
                     <i class="pi pi-chevron-down ml-2"></i>
                 </a>
-                <Menu id="header_menu" ref="header_menu" :model="items" :popup="true" />
             </div>
             <div v-else class="right-header ml-auto">
                 <NuxtLink to="/login">
