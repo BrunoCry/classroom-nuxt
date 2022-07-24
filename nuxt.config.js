@@ -3,6 +3,9 @@ require('dotenv').config()
 export default {
     srcDir: __dirname,
 
+    ssr: true,
+    target: 'server',
+
     head: {
         title: 'ClassRoom',
         htmlAttrs: {
@@ -37,7 +40,8 @@ export default {
     },
 
     plugins: [
-        'plugins/primevue'
+        'plugins/primevue',
+        'plugins/i18n'
     ],
 
     components: true,
@@ -48,10 +52,27 @@ export default {
     ],
 
     modules: [
-        //'primevue/nuxt'
+        //'primevue/nuxt',
+        'nuxt-clipboard',
+        // with options
+        ['nuxt-clipboard', { autoSetContainer: true }],
+        'cookie-universal-nuxt',
+        // With options
+        ['cookie-universal-nuxt', { alias: 'cookies' }],
     ],
+
+    clipboard: {
+        autoSetContainer: true
+    },
 
     build: {
         transpile: ['primevue'],
+    },
+
+    // настройка сервера для запуска nuxt в локальной сети, убрать на деплое
+    server: {
+        port: 3000,  
+        host: '0.0.0.0',
+        
     }
 }

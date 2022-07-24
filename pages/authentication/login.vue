@@ -10,18 +10,23 @@
                         Log In
                     </template>
                     <template #content>
-                        {{ errors }}
-                        <span class="p-input-icon-left d-block w-full mb-0">
-                            <i class="pi pi-inbox" />
-                            <InputText type="text" v-model="form.email" placeholder="Your E-Mail" class="w-full" />
-                        </span>
+                        <div>
+                            <span class="p-input-icon-left d-block w-full mb-0">
+                                <i class="pi pi-inbox" />
+                                <InputText type="text" v-model="form.email" placeholder="Your E-Mail" class="w-full" />
+                            </span>
+                            <span v-if="errors" class="error text-red-400 mt-1 block">{{ errors.email }}</span>
+                        </div>
                         <Divider align="center" type="dashed" class="text-sm">
                             <b>OR</b>
                         </Divider>
-                        <span class="p-input-icon-left d-block w-full">
-                            <i class="pi pi-phone" />
-                            <InputText type="text" v-model="form.phone_number" placeholder="Your phone" class="w-full" />
-                        </span>
+                        <div>
+                            <span class="p-input-icon-left d-block w-full">
+                                <i class="pi pi-phone" />
+                                <InputText type="text" v-model="form.phone_number" placeholder="Your phone" class="w-full" />
+                            </span>
+                            <span v-if="errors" class="error text-red-400 mt-1 block">{{ errors.phone_number }}</span>
+                        </div>
                         <Divider align="center" type="dashed" class="text-sm">
                             <b>Your password</b>
                         </Divider>
@@ -56,6 +61,8 @@
 
         layout: 'authentication',
 
+        middleware: 'guest',
+
         data () {
             return {
                 form: {
@@ -64,12 +71,11 @@
                     password: '',
                     remember: false
                 },
-                loading: true
+                loading: false
             }
         },
 
         computed: mapGetters({
-            user: 'users/currentUser',
             errors: 'users/loginError',
             authenticationToken: 'users/authenticationToken'
         }),
@@ -83,7 +89,7 @@
 
                 await this.authenticateUser(this.form)
 
-                if(!this.error) {
+                if(!this.errors) {
                     this.$router.push({ 'name': 'profile' })
                 }
 

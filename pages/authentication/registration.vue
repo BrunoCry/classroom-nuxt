@@ -97,6 +97,8 @@
 
         layout: 'authentication',
 
+        middleware: 'guest',
+
         data () {
             return {
                 form: {

@@ -137,7 +137,7 @@
             },
             async copyJoinLink() {
                 try {
-                    await navigator.clipboard.writeText(this.joinLink)
+                    await this.$copyText(this.joinLink)
                     this.copied = true
 
                     this.$toast.add({

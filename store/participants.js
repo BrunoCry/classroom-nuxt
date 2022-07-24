@@ -40,7 +40,7 @@ export const mutations = {
 export const actions = {
     async getParticipations({ commit }, roomId) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
         
         try {
             const response = await client.apis.participation.getParticipations({
@@ -60,7 +60,7 @@ export const actions = {
     },
     async current({ commit }, roomId) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
         
         try {
             const response = await client.apis.participation.my({

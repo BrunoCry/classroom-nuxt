@@ -1,4 +1,5 @@
-import { apiClient } from "@/utils/api.js";
+import { apiClient } from '@/utils/api.js'
+import Cookies from 'js-cookie'
 
 export const namespaced = true;
 
@@ -42,7 +43,7 @@ export const mutations = {
 export const actions = {
     async getRooms({ commit }) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
         
         try {
             const response = await client.apis.room.getCurrentUserRooms({}, {
@@ -57,7 +58,7 @@ export const actions = {
     },
     async createRoom({ commit }, requestBody) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
         
         try {
             await client.apis.room.createRoom({}, {
@@ -75,7 +76,7 @@ export const actions = {
     },
     async deleteRoom({ dispatch }, roomId) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
         
         try {
             await client.apis.room.deleteRoom({
@@ -92,7 +93,7 @@ export const actions = {
     },
     async getRoom({ commit }, roomId) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
 
         try {
             const response = await client.apis.room.getRoom({
@@ -109,7 +110,7 @@ export const actions = {
     },
     async updateRoom({ commit }, {roomId, requestBody}) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
         
         try {
             const response = await client.apis.room.updateRoom({
@@ -129,7 +130,7 @@ export const actions = {
     },
     async join({ commit }, joinSlug) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
         
         const response = await client.apis.room.joinBySlug({
             join_slug: joinSlug
