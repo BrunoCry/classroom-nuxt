@@ -1,2 +1,2 @@
-export const API_URL = 'http://localhost:8000'
-export const UPLOAD_URL = API_URL + '/api/v1/attachments'
+export const API_URL = process.env.VUE_APP_API_URL
+export const WS_URL = process.env.VUE_APP_WS_URL

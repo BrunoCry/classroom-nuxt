@@ -52,13 +52,14 @@ export default {
     ],
 
     modules: [
-        //'primevue/nuxt',
         'nuxt-clipboard',
-        // with options
         ['nuxt-clipboard', { autoSetContainer: true }],
+        
         'cookie-universal-nuxt',
-        // With options
         ['cookie-universal-nuxt', { alias: 'cookies' }],
+
+        '@nuxtjs/dotenv',
+        ['@nuxtjs/dotenv', {}]
     ],
 
     clipboard: {
@@ -71,8 +72,7 @@ export default {
 
     // настройка сервера для запуска nuxt в локальной сети, убрать на деплое
     server: {
-        port: 3000,  
-        host: '0.0.0.0',
-        
+        host: process.env.NUXT_HOST || 'localhost',
+        port: process.env.NUXT_PORT || '3000',
     }
 }
