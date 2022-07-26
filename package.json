@@ -9,6 +9,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/router": "^1.7.0",
     "core-js": "^3.19.3",
     "nuxt": "^2.12.2",

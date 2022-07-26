@@ -5,7 +5,22 @@
             <div class="grid">
                 <div class="col-12 xl:col-5">
                     <div class="flex align-items-center mb-6">
-                        <Avatar :label="currentUser.first_name.substring(0, 1)" class="mr-3" size="large" shape="circle" />
+                        <div class="mr-3 avatar_container">
+                            <div @click="activateInput" @mouseover="switchUploadModeOn" @mouseleave="switchUploadModeOff" class="img_container">
+                                <Avatar 
+                                :image="userAvatar"  
+                                :class="isMousOnAvatar ? 'avatar-img avatar-img-hover' : 'avatar-img'" 
+                                size="large" 
+                                shape="circle" />
+                                <input @change="sendAvatarToServer" ref="fileAvatar" class="choose-new-avatar" type="file" name="img" id="chooser_avatar" accept="image/*">
+                            </div> 
+                            <div 
+                                :class="isMousOnAvatar ? 'avatar-upload-img avatar-upload-img-hover' : 'avatar-upload-img'"
+                                @click="activateInput"
+                                @mouseover="switchUploadModeOn" 
+                                @mouseleave="switchUploadModeOff">
+                            </div>
+                        </div>
                         <div>
                             <h3 class="mt-0 mb-1">{{ currentUser.first_name }} {{ currentUser.middle_name }} {{ currentUser.last_name }}</h3>
                             <span>{{ currentUser.email }}</span>
@@ -64,15 +79,19 @@
                     phone_number: '',
                     email: '',
                     password: '',
-                    repeat_password: ''
+                    repeat_password: '',
                 },
-                loading: true
+                loading: true,
+                uploadAvatar: {},
+                isMousOnAvatar: false
             }
         },
         methods: {
             ...mapActions({
                 getCurrentUser: 'users/getCurrentUser',
                 updateUser: 'users/updateUser',
+                updateUserAvatar: 'users/updateAvatar',
+                
             }),
             async updateProfile() {
                 const requestBody = form
@@ -80,13 +99,29 @@
             },
             async updateUser() {
                 await this.$store.dispatch('users/getCurrentUser')
-            }
+            },
+            activateInput() {
+                document.getElementById('chooser_avatar').click()
+            },
+            async sendAvatarToServer() {
+                this.uploadAvatar = this.$refs.fileAvatar.files[0];
+                this.updateUserAvatar({profile_picture: this.uploadAvatar})
+            },
+            switchUploadModeOn() {
+                this.isMousOnAvatar = true
+            },
+            switchUploadModeOff() {
+                this.isMousOnAvatar = false
+            },
         },
         computed: {
             ...mapGetters({
                 currentUser: 'users/currentUser',
                 updateErrors: 'users/registrationErrors',
-            })
+            }),
+            userAvatar() {
+                return this.currentUser.profile_picture_path
+            }
         },
 
         async created () {
@@ -101,3 +136,53 @@
         }
     }
 </script>
+
+<style scoped>
+.choose-new-avatar {
+    width: 0;
+    height: 0;
+}
+
+.img_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 50%;
+    z-index: 100;
+}
+
+.avatar_container {
+    position: relative;
+}
+
+.avatar-img {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    box-shadow: 0 2px 10px rgb(57 54 77 / 30%);
+}
+
+.avatar-img-hover{
+    opacity: 0.6;
+}
+
+.avatar-upload-img {
+    width: 25%;
+    height: 25%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 100;
+    top: 0;
+    right: 0;
+}
+
+.avatar-upload-img-hover {
+    display: block;
+    background-image: url('@/assets/image/upload.svg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+    opacity: 0.8;
+}
+</style>

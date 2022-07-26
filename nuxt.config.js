@@ -44,6 +44,7 @@ export default {
     ],
 
     modules: [
+        '@nuxtjs/dotenv',
         //'primevue/nuxt'
     ],
 
