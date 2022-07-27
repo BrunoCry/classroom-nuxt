@@ -43,6 +43,9 @@ export const mutations = {
     SET_LOGIN_ERROR(state, item) {
         state.loginError = item
     },
+    UPDATE_PROFILE_PICTURE(state, profile_picture_path) {
+        state.currentUser.profile_picture_path = profile_picture_path
+    },
     LOGOUT_USER(state) {
         state.currentUser = undefined
         state.token = null
@@ -110,6 +113,22 @@ export const actions = {
         } catch (e) {
             console.error(e)
             commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
+        }
+    },
+    async updateAvatar({commit, state}, requestBody) {
+        const client = await apiClient
+        const accessToken = localStorage.getItem('accessToken')
+        
+        try {
+            const response = await client.apis.user.addProfilePicture({}, {
+                requestInterceptor: (request) => {
+                    request.headers.Authorization = `Bearer ${accessToken}`
+                },
+                requestBody: requestBody,
+            })
+            commit('UPDATE_PROFILE_PICTURE', response.body.profile_picture_path)
+        } catch (e) {
+            console.error(e)
         }
     },
     logoutUser({ commit }) {
