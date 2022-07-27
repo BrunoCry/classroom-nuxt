@@ -10,18 +10,21 @@
                         Log In
                     </template>
                     <template #content>
-                        {{ errors }}
-                        <span class="p-input-icon-left d-block w-full mb-0">
-                            <i class="pi pi-inbox" />
-                            <InputText type="text" v-model="form.email" placeholder="Your E-Mail" class="w-full" />
-                        </span>
+                        <div>
+                            <span class="p-input-icon-left d-block w-full mb-0">
+                                <i class="pi pi-inbox" />
+                                <InputText type="text" v-model="form.email" placeholder="Your E-Mail" class="w-full" />
+                            </span>
+                        </div>
                         <Divider align="center" type="dashed" class="text-sm">
                             <b>OR</b>
                         </Divider>
-                        <span class="p-input-icon-left d-block w-full">
-                            <i class="pi pi-phone" />
-                            <InputText type="text" v-model="form.phone" placeholder="Your phone" class="w-full" />
-                        </span>
+                        <div>
+                            <span class="p-input-icon-left d-block w-full">
+                                <i class="pi pi-phone" />
+                                <InputText type="text" v-model="form.phone_number" placeholder="Your phone" class="w-full" />
+                            </span>
+                        </div>
                         <Divider align="center" type="dashed" class="text-sm">
                             <b>Your password</b>
                         </Divider>
@@ -29,6 +32,10 @@
                             <i class="pi pi-lock" />
                             <InputText type="password" v-model="form.password" placeholder="Type your password" class="w-full" />
                         </span>
+                        <div class="field-checkbox">
+                            <Checkbox id="remember" v-model="form.remember" :binary="true" />
+                            <label for="remember">Remember me</label>
+                        </div>
                         <Button @click.prevent="loginUser()" :loading="loading" class="w-full text-center block">Log In</Button>
                     </template>
                 </Card>
@@ -52,22 +59,28 @@
 
         layout: 'authentication',
 
+        middleware: 'guest',
+
         data () {
             return {
                 form: {
                     email: '',
-                    phone: '',
-                    password: ''
+                    phone_number: '',
+                    password: '',
+                    remember: false
                 },
-                loading: true
+                loading: false
             }
         },
 
         computed: mapGetters({
-            user: 'users/currentUser',
-            errors: 'users/loginError',
+            error: 'users/loginError',
             authenticationToken: 'users/authenticationToken'
         }),
+
+        async created() {
+            await this.$store.commit('users/SET_LOGIN_ERROR', undefined)
+        },
 
         methods: {
             ...mapActions(
@@ -76,16 +89,17 @@
             async loginUser() {
                 this.loading = true
 
-                const requestBody = {
-                    email: this.form.email,
-                    phone_number: this.form.phone,
-                    password: this.form.password,
-                }
-
-                await this.authenticateUser(requestBody)
+                await this.authenticateUser(this.form)
 
                 if(!this.error) {
                     this.$router.push({ 'name': 'profile' })
+                } else {
+                    this.$toast.add({
+                        severity:'error',
+                        summary:'Error',
+                        detail:this.error,
+                        life: 3000
+                    })
                 }
 
                 this.loading = false

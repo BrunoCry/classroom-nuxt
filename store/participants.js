@@ -1,4 +1,5 @@
-import { apiClient } from "@/utils/api.js";
+import { apiClient } from '@/utils/api.js'
+import Cookies from 'js-cookie'
 
 export const namespaced = true;
 
@@ -39,7 +40,7 @@ export const mutations = {
 export const actions = {
     async getParticipations({ commit }, roomId) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = this.$cookies.get('token')
         
         try {
             const response = await client.apis.participation.getParticipations({
@@ -59,7 +60,7 @@ export const actions = {
     },
     async current({ commit }, roomId) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = this.$cookies.get('token')
         
         try {
             const response = await client.apis.participation.my({

@@ -1,6 +1,7 @@
-import { apiClient } from "@/utils/api.js";
+import { apiClient } from '@/utils/api.js'
+import Cookies from 'js-cookie'
 
-export const namespaced = true;
+export const namespaced = true
 
 export const state = () => ({
     item: null,
@@ -32,7 +33,7 @@ export const mutations = {
 export const actions = {
     async create({ commit }, { postId, assignmentId, attachments }) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = this.$cookies.get('token')
         console.log(attachments)
         
         try {
@@ -58,7 +59,7 @@ export const actions = {
 
     async get({ commit }, attachmentId) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = this.$cookies.get('token')
         
         try {
             const response = await client.apis.attachments.getAttachment({
@@ -78,7 +79,7 @@ export const actions = {
     },
     async delete({ commit }, attachmentId) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = this.$cookies.get('token')
         
         try {
             await client.apis.attachments.deleteAttachment({

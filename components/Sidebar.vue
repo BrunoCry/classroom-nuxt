@@ -74,10 +74,6 @@
 
                 this.$router.push({ name: 'home' })
             }
-        },
-
-        async mounted() {
-            this.$forceUpdate()
         }
     }
 </script>

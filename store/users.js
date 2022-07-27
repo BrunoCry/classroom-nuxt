@@ -1,4 +1,5 @@
-import { apiClient } from "@/utils/api.js";
+import { apiClient } from '@/utils/api.js'
+import Cookies from 'js-cookie'
 
 export const namespaced = true;
 
@@ -8,6 +9,7 @@ export const state = () => ({
     registrationErrors: {},
     loginError: undefined,
     errors: {},
+    token: null
 })
 
 export const getters = {
@@ -20,6 +22,12 @@ export const getters = {
     loginError(state) {
         return state.loginError
     },
+    checkAuth(state) {
+        return state.currentUser !== undefined
+    },
+    token(state) {
+        return state.token
+    }
 }
 
 export const mutations = {
@@ -40,6 +48,10 @@ export const mutations = {
     },
     LOGOUT_USER(state) {
         state.currentUser = undefined
+        state.token = null
+    },
+    SET_ACCESS_TOKEN(state, item) {
+        state.token = item
     }
 }
 
@@ -59,21 +71,20 @@ export const actions = {
     },
     async authenticateUser({ commit }, requestBody) {
         const client = await apiClient
-        console.log(client)
 
         try {
             var response = await client.apis.user.authenticateUser({}, {requestBody: requestBody })
-            console.log(response.body.access_token)
-            localStorage.setItem('accessToken', response.body.access_token)
+            this.$cookies.set('token', response.body.access_token)
+            commit('SET_ACCESS_TOKEN', response.body.access_token)
             commit('SET_LOGIN_ERROR', undefined)
-            console.log(response)
         } catch(e) {
+            console.error(e)
             commit('SET_LOGIN_ERROR', e.response.body.detail)
         }
     },
     async getCurrentUser({ commit }) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = this.$cookies.get('token')
 
         try {
             const response = await client.apis.user.currentUserInfo({}, {
@@ -83,13 +94,12 @@ export const actions = {
             })
             commit('SET_CURRENT_USER', response.body)
         } catch (e) {
-            alert('Not logged in!')
-            localStorage.removeItem('accessToken')
+            Cookies.remove('token')
         }
     },
     async updateUser({commit}, requestBody) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = this.$cookies.get('token')
         
         try {
             const response = await client.apis.authentication.updateCurrentUser({}, {
@@ -100,7 +110,6 @@ export const actions = {
             })
             commit('SET_CURRENT_USER', response.body)
             commit('SET_REGISTRATION_ERRORS', {})
-            alert('Success')
         } catch (e) {
             console.error(e)
             commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
@@ -123,7 +132,7 @@ export const actions = {
         }
     },
     logoutUser({ commit }) {
-        localStorage.removeItem('accessToken')
+        Cookies.remove('token')
         commit('LOGOUT_USER')
     }
 }
