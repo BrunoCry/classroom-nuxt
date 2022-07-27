@@ -18,9 +18,10 @@ import Toast from 'primevue/toast'
 import Sidebar from '@/components/Sidebar.vue'
 import VHeader from '@/components/Header.vue'
 
+
 export default {
     components: {
-        Sidebar, Toast, VHeader
+        Sidebar, Toast, VHeader,
     },
 
     name: 'DefaultLayout'

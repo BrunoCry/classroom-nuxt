@@ -17,7 +17,7 @@
                 <div>
                     <span class="text-sm mb-2 block">Link to join:</span>
                     <div class="col-5 p-0 mb-4">
-                        <div class="p-inputgroup">
+                        <div class="p-inputgroup" v-if="currentParticipation.is_moderator">
                             <InputText placeholder="Link to join" v-model="joinLink" disabled />
                             <Button label="Copy to clipboard" @click.prevent="copyJoinLink()" />
                         </div>

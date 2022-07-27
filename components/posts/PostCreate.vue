@@ -6,7 +6,15 @@
         </div>
         <div class="grid">
             <div class="col-12 xl:col-5">
-                <label class="text-sm mb-3 block">Type of post: <b>{{ $route.query.type }}</b></label>
+                <label class="text-sm mb-3 block">
+                    <Dropdown
+                        v-model="form.type"
+                        optionValue="value"
+                        :options="postTypes"
+                        optionLabel="name"
+                        placeholder="Select a Post Type"
+                    />
+                </label>
                 <div class="mb-3">
                     <InputText v-model="form.title" placeholder="Title of post" class="block w-full" />
                     <span class="text-sm text-red-400" v-if="errors.title">{{ errors.title }}</span>
@@ -40,14 +48,18 @@ import InputText from 'primevue/inputtext'
 import Textarea from 'primevue/textarea'
 import { mapActions, mapGetters } from 'vuex'
 import AttachmentList from '@/components/attachments/AttachmentList.vue'
+import Dropdown from 'primevue/dropdown';
+import attachmentsCreate from '~/mixins/attachmentsCreate.js'
 
 
 export default {
     components: {
         Button, InputText, Textarea, FileUpload,
-        Divider, AttachmentList,
+        Divider, AttachmentList, Dropdown,
     },
-
+    mixins: [
+        attachmentsCreate,
+    ],
     data () {
         const post = this.$store.getters['roomposts/item']
 
@@ -59,7 +71,11 @@ export default {
                 room_id: this.$route.params.id,
                 type: this.$route.query.type || 'material'
             },
-            attachments: [],
+            postTypes: [
+                {name: 'Course material', value: 'material'},
+                {name: 'Homework', value: 'homework'},
+            ],
+            type: undefined,
         }
     },
 
@@ -129,23 +145,6 @@ export default {
                     { postId: this.post.id, requestBody: this.form }
                 )
             }
-        },
-
-        async createAttachments(event) {
-            this.attachments = this.attachments.concat(event.files)
-            let newAttachments = [...this.$store.getters['attachments/items']]
-
-            for(let i = 0; i < event.files.length; i++) {
-                newAttachments.push(event.files[i])
-            }
-
-            this.$store.commit('attachments/SET_ITEMS', newAttachments)
-            this.$toast.add({
-                severity:'info',
-                summary:'Success',
-                detail:`Attachments added`,
-                life: 3000,
-            })
         },
     }
 }

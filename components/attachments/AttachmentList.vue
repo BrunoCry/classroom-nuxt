@@ -2,7 +2,6 @@
 <div class="attachments-list">
     <Listbox
         :options="attachments"
-        :filter="true"
         listStyle="max-height:250px"
         style="width:19em"
         @change="changeItem"
@@ -58,6 +57,17 @@ export default {
         },
         async download(option) {
             const attachment = option.value
+
+            if(!attachment.id) {
+                this.$toast.add({
+                    severity: 'error',
+                    summary: "Can't download attachment",
+                    detail: "The attached file isn't uploaded!",
+                    life: 3000
+                })
+                return
+            }
+
             await this.getAttachment(attachment.id)
             return downloadFromBlob(this.$store.getters['attachments/item'], attachment.filename)
         },

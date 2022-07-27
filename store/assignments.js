@@ -1,5 +1,5 @@
 import { apiClient } from '@/utils/api.js'
-import Cookies from 'js-cookie'
+
 
 export const namespaced = true
 
@@ -153,7 +153,7 @@ export const actions = {
                     request.headers.Authorization = `Bearer ${accessToken}`
                 },
             })
-            commit('SET_ITEM', response.body)
+            commit('SET_ITEM', response.body || {})
         } catch (e) {
             console.error(e)
         }

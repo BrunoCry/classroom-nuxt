@@ -91,7 +91,6 @@ export const actions = {
             })
             commit('SET_CURRENT_USER', response.body)
         } catch (e) {
-            alert('Not logged in!')
             Cookies.remove('token')
         }
     },
@@ -108,7 +107,6 @@ export const actions = {
             })
             commit('SET_CURRENT_USER', response.body)
             commit('SET_REGISTRATION_ERRORS', {})
-            alert('Success')
         } catch (e) {
             console.error(e)
             commit('SET_REGISTRATION_ERRORS', e.response.body.detail)

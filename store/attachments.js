@@ -1,5 +1,5 @@
 import { apiClient } from '@/utils/api.js'
-import Cookies from 'js-cookie'
+
 
 export const namespaced = true
 
@@ -31,7 +31,7 @@ export const mutations = {
 }
 
 export const actions = {
-    async create({ commit }, { postId, assignmentId, attachments }) {
+    async create({ commit, state }, { postId, assignmentId, attachments }) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
         console.log(attachments)
@@ -48,16 +48,17 @@ export const actions = {
                     attachments: attachments,
                 }
             })
-            commit('SET_ITEM', response.data)
+            let uploadedAttachments = state.items.filter(e => e.id) 
+
+            commit('SET_ITEMS', uploadedAttachments.concat(response.body.created))
             commit('SET_ERRORS', {})
         } catch (e) {
             console.error(e)
-            commit('SET_ERRORS', e.response.body.detail)
-
         }
     },
 
-    async get({ commit }, attachmentId) {
+    async get({ commit, app }, attachmentId) {
+        console.log(app)
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
         
@@ -73,8 +74,6 @@ export const actions = {
             commit('SET_ERRORS', {})
         } catch (e) {
             console.error(e)
-            commit('SET_ERRORS', e.response.body.detail)
-
         }
     },
     async delete({ commit }, attachmentId) {
@@ -90,8 +89,7 @@ export const actions = {
                 }
             })
         } catch (e) {
-            console.error(e.response.body)
-            commit('SET_ERRORS', e.response.body.detail)
+            console.error(e)
         }
     }
 }
