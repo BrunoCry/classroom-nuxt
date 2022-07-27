@@ -7,19 +7,10 @@
                     <div class="flex align-items-center mb-6">
                         <div class="mr-3 avatar_container">
                             <div @click="activateInput" @mouseover="switchUploadModeOn" @mouseleave="switchUploadModeOff" class="img_container">
-                                <Avatar 
-                                :image="userAvatar"  
-                                :class="isMousOnAvatar ? 'avatar-img avatar-img-hover' : 'avatar-img'" 
-                                size="large" 
-                                shape="circle" />
+                                <Avatar :image="userAvatar" class="avatar-img" size="large" shape="circle" />
                                 <input @change="sendAvatarToServer" ref="fileAvatar" class="choose-new-avatar" type="file" name="img" id="chooser_avatar" accept="image/*">
-                            </div> 
-                            <div 
-                                :class="isMousOnAvatar ? 'avatar-upload-img avatar-upload-img-hover' : 'avatar-upload-img'"
-                                @click="activateInput"
-                                @mouseover="switchUploadModeOn" 
-                                @mouseleave="switchUploadModeOff">
                             </div>
+                            <i class="pi pi-cloud-upload avatar-upload-img"></i>
                         </div>
                         <div>
                             <h3 class="mt-0 mb-1">{{ currentUser.first_name }} {{ currentUser.middle_name }} {{ currentUser.last_name }}</h3>
@@ -154,6 +145,7 @@
 
 .avatar_container {
     position: relative;
+    user-select: none;
 }
 
 .avatar-img {
@@ -163,26 +155,23 @@
     box-shadow: 0 2px 10px rgb(57 54 77 / 30%);
 }
 
-.avatar-img-hover{
+.avatar-img:hover{
     opacity: 0.6;
 }
 
 .avatar-upload-img {
     width: 25%;
     height: 25%;
+    font-size: 2.5rem;
     position: absolute;
-    cursor: pointer;
     z-index: 100;
     top: 0;
     right: 0;
+    display: none;
 }
 
-.avatar-upload-img-hover {
+.img_container:hover ~ .avatar-upload-img {
     display: block;
-    background-image: url('@/assets/image/upload.svg');
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: 100% 0%;
     opacity: 0.8;
 }
 </style>
