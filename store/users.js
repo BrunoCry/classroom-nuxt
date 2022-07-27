@@ -117,7 +117,7 @@ export const actions = {
     },
     async updateAvatar({commit, state}, requestBody) {
         const client = await apiClient
-        const accessToken = localStorage.getItem('accessToken')
+        const accessToken = this.$cookies.get('token')
         
         try {
             const response = await client.apis.user.addProfilePicture({}, {
