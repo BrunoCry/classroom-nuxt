@@ -14,7 +14,7 @@ export const state = () => ({
 
 export const getters = {
     currentUser(state) {
-        return state.currentUser;
+        return state.currentUser
     },
     registrationErrors(state) {
         return state.registrationErrors
@@ -66,6 +66,7 @@ export const actions = {
             return
         }
     },
+
     async authenticateUser({ commit }, requestBody) {
         const client = await apiClient
 
@@ -74,8 +75,6 @@ export const actions = {
             Cookies.set('token', response.body.access_token)
             commit('SET_ACCESS_TOKEN', response.body.access_token)
             commit('SET_LOGIN_ERROR', undefined)
-
-            
         } catch(e) {
             commit('SET_LOGIN_ERROR', e.response.body.detail)
         }
