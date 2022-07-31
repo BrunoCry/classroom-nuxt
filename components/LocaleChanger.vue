@@ -1,16 +1,16 @@
 <template>
     <div class="language-change ml-4">
-        <Dropdown v-model="locale" :options="locales" class="py-0" placeholder="Set a language">
+        <Dropdown v-model="locale" :options="locales" class="styled-dropdown" placeholder="Set a language">
             <template #value="slotProps">
                 <div class="flex align-items-center">
-                    <img v-if="slotProps.value.code" :src="'https://flagcdn.com/w20/' + slotProps.value.code + '.png'" width="18" class="mr-2" />
-                    <div>{{slotProps.value.name }}</div>
+                    <img v-if="slotProps.value.code" :src="'https://flagcdn.com/w20/' + slotProps.value.code + '.png'" width="18" class="mr-3 flag" />
+                    <div>{{ slotProps.value.name }}</div>
                 </div>
             </template>
             <template #option="slotProps">
                 <div class="flex align-items-center" @click.prevent="changeLocale(slotProps.option.code)">
-                    <img :src="'https://flagcdn.com/w20/' + slotProps.option.code + '.png'" width="18" class="mr-2" />
-                    <div>{{slotProps.option.name }}</div>
+                    <img :src="'https://flagcdn.com/w20/' + slotProps.option.code + '.png'" width="18" class="mr-3 flag" />
+                    <div>{{ slotProps.option.name }}</div>
                 </div>
             </template>
         </Dropdown>
@@ -29,7 +29,7 @@
 
         data () {
             return {
-                locale: '',
+                locale: null,
                 locales: [
                     { name: "Русский", code: 'ru' },
                     { name: "English", code: 'gb-eng' }
@@ -52,15 +52,20 @@
         },
 
         created () {
-            var setable = [
-
-            ]
+            for(var i = 0; i < this.locales.length; i++) {
+                if(this.locales[i]['code'] == this.currentLocale) {
+                    this.locale = this.locales[i]
+                }
+            }
         }
     }
 </script>
 
-<style scoped>
-    .p-dropdown-label + .p-inputtext {
-        padding:4px 0px 0px 4px;
+<style>
+    .p-dropdown-label {
+        padding:0.5rem 1rem!important;
+    }
+    .flag {
+        box-shadow: 0px 1px 7px 0px #b7b7b7;
     }
 </style>
