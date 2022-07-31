@@ -15,7 +15,6 @@
                                 <i class="pi pi-inbox" />
                                 <InputText type="text" v-model="form.email" :placeholder="$t('login.placeholders.email')" class="w-full" />
                             </span>
-                            <span v-if="errors" class="error text-red-400 mt-1 block">{{ errors.email }}</span>
                         </div>
                         <Divider align="center" type="dashed" class="text-sm">
                             <b>{{ $t('login.dividers.or') }}</b>
@@ -25,7 +24,6 @@
                                 <i class="pi pi-phone" />
                                 <InputText type="text" v-model="form.phone_number" :placeholder="$t('login.placeholders.phone')" class="w-full" />
                             </span>
-                            <span v-if="errors" class="error text-red-400 mt-1 block">{{ errors.phone_number }}</span>
                         </div>
                         <Divider align="center" type="dashed" class="text-sm">
                             <b>{{ $t('login.dividers.password') }}</b>
@@ -76,9 +74,13 @@
         },
 
         computed: mapGetters({
-            errors: 'users/loginError',
+            error: 'users/loginError',
             authenticationToken: 'users/authenticationToken'
         }),
+
+        async created() {
+            await this.$store.commit('users/SET_LOGIN_ERROR', undefined)
+        },
 
         methods: {
             ...mapActions(
@@ -89,8 +91,15 @@
 
                 await this.authenticateUser(this.form)
 
-                if(!this.errors) {
+                if(!this.error) {
                     this.$router.push({ 'name': 'profile' })
+                } else {
+                    this.$toast.add({
+                        severity:'error',
+                        summary:'Error',
+                        detail:this.error,
+                        life: 3000
+                    })
                 }
 
                 this.loading = false

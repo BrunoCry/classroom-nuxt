@@ -1,8 +1,6 @@
-import Cookies from 'js-cookie'
+export default async ({ store, req, app }) => {
+    const token = app.$cookies.get('token')
 
-export default async ({ store, req }) => {
-    const token = Cookies.get('token')
-    
     if (!store.getters['users/checkAuth'] && token) {
         store.dispatch('users/getCurrentUser')
     }

@@ -47,7 +47,7 @@
                 </div>
             </template>
             <template v-else>
-                <template v-if="rooms.items.length != 0">
+                <template v-if="rooms.items && rooms.items.length != 0">
                     <NuxtLink :to="'/rooms/show/' + room.room.id" v-for="room in rooms.items" class="xl:col-4 col-12" :key="room.id">
                         <div class="room-card bg-white border-solid border-1 p-3 border-round-lg border-300">
                             <div class="flex align-items-center mb-2">

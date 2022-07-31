@@ -1,5 +1,5 @@
 import { apiClient } from '@/utils/api.js'
-import Cookies from 'js-cookie'
+
 
 export const namespaced = true
 
@@ -33,7 +33,7 @@ export const mutations = {
 export const actions = {
     async fetch({ commit }, { postId, roomId }) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
 
         try {
             const response = await client.apis.assignment.fetchAssignments({
@@ -53,7 +53,7 @@ export const actions = {
     },
     async getRoomAssigments({ commit }, roomId) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
         
         try {
             const response = await client.apis.assignment.fetchAssignments({
@@ -73,7 +73,7 @@ export const actions = {
     },
     async create(context, requestBody) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
 
         try {
             const response = await client.apis.assignment.assignHomework({}, {
@@ -90,7 +90,7 @@ export const actions = {
     },
     async requestChanges(context, { assignmentId, requestBody }) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
 
         try {
             const response = await client.apis.assignment.requestAssignmentChanges({
@@ -108,7 +108,7 @@ export const actions = {
     },
     async reassign(context, assignmentId) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
 
         try {
             const response = await client.apis.assignment.reassignHomework({
@@ -125,7 +125,7 @@ export const actions = {
     },
     async rateHomework(context, { assignmentId, requestBody }) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
 
         try {
             const response = await client.apis.assignment.rateHomework({
@@ -143,7 +143,7 @@ export const actions = {
     },
     async myInPost({ commit }, postId) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
 
         try {
             const response = await client.apis.assignment.myInPost({
@@ -153,14 +153,14 @@ export const actions = {
                     request.headers.Authorization = `Bearer ${accessToken}`
                 },
             })
-            commit('SET_ITEM', response.body)
+            commit('SET_ITEM', response.body || {})
         } catch (e) {
             console.error(e)
         }
     },
     async get({ commit }, assignmentId) {
         const client = await apiClient
-        const accessToken = Cookies.get('token')
+        const accessToken = this.$cookies.get('token')
 
         try {
             const response = await client.apis.assignment.get({
