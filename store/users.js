@@ -63,7 +63,7 @@ export const actions = {
         try {
             await client.apis.user.registerUser({}, { requestBody: requestBody })
             commit('SET_REGISTRATION_ERRORS', {})
-        } catch(e) {
+        } catch (e) {
             commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
             console.error(e.response.body.detail)
             return
@@ -73,11 +73,11 @@ export const actions = {
         const client = await apiClient
 
         try {
-            var response = await client.apis.user.authenticateUser({}, {requestBody: requestBody })
+            var response = await client.apis.user.authenticateUser({}, { requestBody: requestBody })
             this.$cookies.set('token', response.body.access_token)
             commit('SET_ACCESS_TOKEN', response.body.access_token)
             commit('SET_LOGIN_ERROR', undefined)
-        } catch(e) {
+        } catch (e) {
             console.error(e)
             commit('SET_LOGIN_ERROR', e.response.body.detail)
         }
@@ -97,10 +97,10 @@ export const actions = {
             Cookies.remove('token')
         }
     },
-    async updateUser({commit}, requestBody) {
+    async updateUser({ commit }, requestBody) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
-        
+
         try {
             const response = await client.apis.authentication.updateCurrentUser({}, {
                 requestInterceptor: (request) => {
@@ -115,10 +115,10 @@ export const actions = {
             commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
         }
     },
-    async updateAvatar({commit, state}, requestBody) {
+    async updateAvatar({ commit, state }, requestBody) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
-        
+
         try {
             const response = await client.apis.user.addProfilePicture({}, {
                 requestInterceptor: (request) => {
