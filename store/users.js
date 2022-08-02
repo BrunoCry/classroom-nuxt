@@ -86,7 +86,7 @@ export const actions = {
     async getCurrentUser({ commit }) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
-
+        
         try {
             const response = await client.apis.user.currentUserInfo({}, {
                 requestInterceptor: (request) => {
@@ -95,7 +95,8 @@ export const actions = {
             })
             commit('SET_CURRENT_USER', response.body)
         } catch (e) {
-            Cookies.remove('token')
+            //Cookies.remove('token')
+            throw e
         }
     },
     async updateUser({ commit }, requestBody) {
@@ -119,7 +120,7 @@ export const actions = {
     async updateAvatar({ commit, state }, requestBody) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
-
+        
         try {
             const response = await client.apis.user.addProfilePicture({}, {
                 requestInterceptor: (request) => {
@@ -133,7 +134,7 @@ export const actions = {
         }
     },
     logoutUser({ commit }) {
-        Cookies.remove('token')
+      this.$cookies.remove('token')
         commit('LOGOUT_USER')
     }
 }
