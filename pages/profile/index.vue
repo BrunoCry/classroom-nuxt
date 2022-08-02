@@ -6,11 +6,11 @@
                 <div class="col-12 xl:col-5">
                     <div class="flex align-items-center mb-6">
                         <div class="mr-3 avatar_container">
-                            <div @click="activateInput" @mouseover="switchUploadModeOn" @mouseleave="switchUploadModeOff" class="img_container">
-                                <Avatar :image="userAvatar" class="avatar-img" size="large" shape="circle" />
+                            <div @click="activateInput" class="img_container">
+                                <Avatar :image="currentUser.profile_picture_path" class="avatar-img" size="large" shape="circle" />
+                                <i class="pi pi-cloud-upload avatar-upload-img"></i>
                                 <input @change="sendAvatarToServer" ref="fileAvatar" class="choose-new-avatar" type="file" name="img" id="chooser_avatar" accept="image/*">
-                            </div>
-                            <i class="pi pi-cloud-upload avatar-upload-img"></i>
+                            </div> 
                         </div>
                         <div>
                             <h3 class="mt-0 mb-1">{{ currentUser.first_name }} {{ currentUser.middle_name }} {{ currentUser.last_name }}</h3>
@@ -98,32 +98,25 @@
                 this.uploadAvatar = this.$refs.fileAvatar.files[0];
                 this.updateUserAvatar({profile_picture: this.uploadAvatar})
             },
-            switchUploadModeOn() {
-                this.isMousOnAvatar = true
-            },
-            switchUploadModeOff() {
-                this.isMousOnAvatar = false
-            },
         },
         computed: {
             ...mapGetters({
                 currentUser: 'users/currentUser',
                 updateErrors: 'users/registrationErrors',
             }),
-            userAvatar() {
-                return this.currentUser.profile_picture_path
-            }
         },
 
         async created () {
-            await this.$store.dispatch('users/getCurrentUser')
+            if (!this.$store.getters['users/checkAuth']) {
+                await this.$store.dispatch('users/getCurrentUser')
+            }
             
             setTimeout(() => {
                     this.loading = false
             }, 600)
 
-            this.form = this.currentUser
-            this.form.password = ''
+            this.form = Object.assign({}, this.currentUser)
+            
         }
     }
 </script>
@@ -168,9 +161,10 @@
     top: 0;
     right: 0;
     display: none;
+    pointer-events: none;
 }
 
-.img_container:hover ~ .avatar-upload-img {
+.img_container:hover .avatar-upload-img {
     display: block;
     opacity: 0.8;
 }
