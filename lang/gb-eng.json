@@ -1,0 +1,66 @@
+{
+    "test": "Test message",
+    "rooms": {
+        "list": "List of your rooms",
+        "description": "A list of rooms available to you is displayed here. You can also create your own room.",
+        "create": "Create new room"
+    },
+    "sidebar": {
+        "group-title": {
+            "navigation": "Navigation",
+            "education": "Education",
+            "profile": "My profile"
+        },
+        "links": {
+            "dashboard": "Dashboard",
+            "rooms": "Rooms",
+            "dialogs": "Dialogs",
+            "profile": "My profile",
+            "logout": "Log out",
+            "login": "Log in",
+            "registration": "Registration"
+        }
+    },
+    "header": {
+        "search": "Search...",
+        "sign-in": "Log in",
+        "sign-up": "Sign up"
+    },
+    "back-to-home": "Back to home",
+    "login": {
+        "title": "Authorization",
+        "placeholders": {
+            "email": "Your E-Mail",
+            "phone": "Your phone",
+            "password": "Enter the password"
+        },
+        "dividers": {
+            "or": "OR",
+            "password": "Your password"
+        },
+        "remember": "Remember me",
+        "button": "Log in"
+    },
+    "registration": {
+        "title": "Registration",
+        "placeholders": {
+            "email": "Your E-Mail",
+            "phone": "Your phone",
+            "first-name": "First name",
+            "last-name": "Last name",
+            "middle-name": "Middle name (optional)",
+            "password": "Enter the password",
+            "repeat-password": "Repeat the password"
+        },
+        "dividers": {
+            "credentials": "Credentials",
+            "personal": "Personals",
+            "password-eula": "Password and EULA"
+        },
+        "eula": "Accept EULA",
+        "button": "Sign up for free"
+    },
+    "profile": {
+        
+    }
+}

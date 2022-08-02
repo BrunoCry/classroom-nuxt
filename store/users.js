@@ -14,7 +14,7 @@ export const state = () => ({
 
 export const getters = {
     currentUser(state) {
-        return state.currentUser;
+        return state.currentUser
     },
     registrationErrors(state) {
         return state.registrationErrors
@@ -69,6 +69,7 @@ export const actions = {
             return
         }
     },
+
     async authenticateUser({ commit }, requestBody) {
         const client = await apiClient
 

@@ -3,7 +3,6 @@
     <Listbox
         :options="attachments"
         listStyle="max-height:250px"
-        style="width:19em"
         @change="changeItem"
     >   
         <template
@@ -24,9 +23,9 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import Listbox from 'primevue/listbox';
-import {downloadFromBlob} from '@/utils/utils.js'
+import { mapGetters, mapActions } from 'vuex'
+import Listbox from 'primevue/listbox'
+import { downloadFromBlob } from '@/utils/utils.js'
 
 export default {
     props: {

@@ -45,7 +45,7 @@
             </div>
             <div class="col-12 xl:col-4">
                 <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
-                    <h3 class="my-0">Attached files</h3>
+                    <h3 class="mt-0 mb-3">Attached files</h3>
                     <AttachmentList />
                     <Divider />
                 </div>

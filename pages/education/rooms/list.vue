@@ -1,10 +1,10 @@
 <template>
     <div class="rooms-page">
-        <h2 class="mt-0">List of your rooms ({{ rooms.total }})</h2>
-        <p>This page displays a list of all the rooms available to you. You can also create a new room.</p>
+        <h2 class="mt-0">{{ $t('rooms.list') }} ({{ rooms.total }})</h2>
+        <p>{{ $t('rooms.description') }}</p>
         <div class="pt-2 pb-4">
             <NuxtLink to="/rooms/create">
-                <Button class="p-button-primary shadow-sm">Create new room</Button>
+                <Button class="p-button-primary shadow-sm">{{ $t('rooms.create') }}</Button>
             </NuxtLink>
         </div>
         <div class="rooms-list grid">

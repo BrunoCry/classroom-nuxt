@@ -4,7 +4,6 @@ export default {
     srcDir: __dirname,
 
     ssr: true,
-    target: 'server',
 
     head: {
         title: 'ClassRoom',
@@ -36,11 +35,12 @@ export default {
     ],
 
     router: {
-        middleware: ['check-auth']
+        middleware: ['locale', 'check-auth']
     },
 
     plugins: [
         'plugins/primevue',
+        'plugins/nuxt-client-init',
         'plugins/i18n'
     ],
 

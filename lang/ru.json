@@ -1,3 +1,63 @@
 {
-    "Welcome to classpace": "Тестовое сообщение"
+    "test": "Тестовое сообщение",
+    "rooms": {
+        "list": "Список ваших комнат",
+        "description": "Здесь отображается список доступных Вам комнат. Вы также можете создать свою комнату.",
+        "create": "Создать новую комнату"
+    },
+    "sidebar": {
+        "group-title": {
+            "navigation": "Навигация",
+            "education": "Обучение",
+            "profile": "Мой профиль"
+        },
+        "links": {
+            "dashboard": "Главная страница",
+            "rooms": "Комнаты",
+            "dialogs": "Диалоги",
+            "profile": "Мой профиль",
+            "logout": "Выйти из аккаунта",
+            "login": "Войти",
+            "registration": "Регистрация"
+        }
+    },
+    "header": {
+        "search": "Поиск...",
+        "sign-in": "Войти",
+        "sign-up": "Регистрация"
+    },
+    "back-to-home": "Вернуться на главную",
+    "login": {
+        "title": "Авторизация",
+        "placeholders": {
+            "email": "Ваш E-Mail",
+            "phone": "Ваш телефон",
+            "password": "Введите пароль"
+        },
+        "dividers": {
+            "or": "ИЛИ",
+            "password": "Ваш пароль"
+        },
+        "remember": "Запомнить меня",
+        "button": "Авторизироваться"
+    },
+    "registration": {
+        "title": "Регистрация",
+        "placeholders": {
+            "email": "Ваш E-Mail",
+            "phone": "Ваш телефон",
+            "first-name": "Имя",
+            "last-name": "Фамилия",
+            "middle-name": "Отчество (опционально)",
+            "password": "Введите пароль",
+            "repeat-password": "Повторите пароль"
+        },
+        "dividers": {
+            "credentials": "Учётные данные",
+            "personal": "Ваши данные",
+            "password-eula": "Пароль и соглашение"
+        },
+        "eula": "Принять пользовательское соглашение",
+        "button": "Зарегистрироваться"
+    }
 }
