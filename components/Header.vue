@@ -1,7 +1,10 @@
 <template>
     <nav class="header">
         <div class="container flex align-items-center">
-            <span class="p-input-icon-left">
+            <Button @click.prevent="openSidebar" class="py-2 p-button-outlined inline lg:hidden">
+                <i class="pi pi-list"></i>
+            </Button>
+            <span class="p-input-icon-left hidden lg:inline">
                 <i class="pi pi-search" />
                 <InputText type="text" class="py-2" :placeholder="$t('header.search')" />
             </span>
@@ -30,7 +33,7 @@
     import Button from 'primevue/button'
     import InputText from 'primevue/inputtext'
     import LocaleChanger from '~/components/LocaleChanger.vue'
-    import { mapGetters } from 'vuex'
+    import { mapGetters, mapActions } from 'vuex'
 
     export default {
         name: 'HeaderComponent',
@@ -46,6 +49,12 @@
         computed: {
             ...mapGetters({
                 user: 'users/currentUser'
+            })
+        },
+
+        methods: {
+            ...mapActions({
+                openSidebar: 'sidebar/openSidebar'
             })
         }
     }
