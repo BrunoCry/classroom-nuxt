@@ -11,7 +11,7 @@
             <LocaleChanger />
             <div v-if="user != undefined" class="right-header ml-auto">
                 <NuxtLink to="/profile" class="flex align-items-center user-info">
-                    <Avatar label="D" shape="circle" class="mr-2" />
+                    <Avatar :image="user.profile_picture_path" shape="circle" class="mr-2" />
                     <b>{{ user.first_name }} {{ user.last_name }}</b>
                     <i class="pi pi-chevron-down ml-2"></i>
                 </NuxtLink>
