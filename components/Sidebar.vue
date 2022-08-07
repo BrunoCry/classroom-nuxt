@@ -1,6 +1,10 @@
 <template>
-    <div class="sidebar">
-        <div class="sidebar-title uppercase text-center block text-xl">
+    <div class="sidebar" :class="{ 'opened-sidebar': opened == true }">
+        <div class="sidebar-title uppercase text-center flex align-items-center lg:hidden text-xl mx-5">
+            <span>Class<b>Room</b></span>
+            <i @click.prevent="closeSidebar" class="pi pi-times close-sidebar"></i>
+        </div>
+        <div class="sidebar-title uppercase text-center hidden lg:block text-xl">
             Class<b>Room</b>
         </div>
         <div class="sidebar-content">
@@ -60,13 +64,15 @@
 
         computed: {
             ...mapGetters({
-                user: 'users/currentUser'
+                user: 'users/currentUser',
+                opened: 'sidebar/opened'
             })
         },
 
         methods: {
             ...mapActions({
-                logout_user: 'users/logoutUser'
+                logout_user: 'users/logoutUser',
+                closeSidebar: 'sidebar/closeSidebar'
             }),
 
             async logout() {

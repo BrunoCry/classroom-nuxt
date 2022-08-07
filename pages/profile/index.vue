@@ -38,6 +38,7 @@
                     <InputText id="first_name" v-model="form.password" class="block w-full mb-4" />
                     <label for="first_name" class="mb-1 block">Repeat password</label>
                     <InputText id="first_name" v-model="form.repeat_password" class="block w-full mb-5" />
+                    <Button @click.prevent="updateProfile">Update your profile</Button>
                 </div>
             </div>
         </template>
@@ -55,10 +56,11 @@
     import InputText from 'primevue/inputtext';
     import Divider from 'primevue/divider';
     import ProgressSpinner from 'primevue/progressspinner';
+    import Button from 'primevue/button';
 
     export default {
         components: {
-            Avatar, InputText, Divider, ProgressSpinner
+            Avatar, InputText, Divider, ProgressSpinner, Button
         },
         data () {
             return {
@@ -85,7 +87,7 @@
                 
             }),
             async updateProfile() {
-                const requestBody = form
+                const requestBody = this.form
                 await this.updateUser(requestBody)
             },
             async updateUser() {

@@ -2,8 +2,8 @@
     <div class="page">
         <v-header />
         <sidebar />
-        <div class="container p-5">
-          <Toast />
+        <Toast />
+        <div class="container pt-4">
             <transition name="fade">
               <Nuxt />
             </transition>
