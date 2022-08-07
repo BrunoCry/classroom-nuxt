@@ -82,7 +82,7 @@
 
             setTimeout(() => {
                 this.loading = false
-            }, 500)
+            }, 100)
 
             this.form.name = this.room.name
             this.form.description = this.room.description

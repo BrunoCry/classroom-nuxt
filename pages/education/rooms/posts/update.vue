@@ -40,7 +40,7 @@
 
             setTimeout(() => {
                 this.loading = false
-            }, 800)
+            }, 100)
         }
     }
 </script>

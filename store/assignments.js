@@ -47,7 +47,6 @@ export const actions = {
             
             commit('SET_ITEMS', response.body)
         } catch (e) {
-            console.error(e)
             commit('SET_ERRORS', e)
         }
     },
@@ -161,6 +160,7 @@ export const actions = {
     async get({ commit }, assignmentId) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
+        console.log('id перед отправкой', assignmentId)
 
         try {
             const response = await client.apis.assignment.get({

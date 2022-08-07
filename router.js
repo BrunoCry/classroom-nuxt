@@ -20,7 +20,7 @@ const routes = [
             { path: '', name: 'rooms.post.detail', component: page('education/rooms/posts/detail.vue'),  meta: { requiresAuth: true } },
             { path: 'edit', name: 'rooms.post.update', component: page('education/rooms/posts/update.vue'),  meta: { requiresAuth: true } },
         ] },
-        { path: ':roomId/assignments', component: page('education/rooms/layout.vue'), children: [
+        { path: ':roomId/assignments/:postId', component: page('education/rooms/layout.vue'), children: [
             { path: '', name: 'rooms.assignments.list', component: page('education/rooms/assignments/list.vue'),  meta: { requiresAuth: true } },
         ]},
     ] },

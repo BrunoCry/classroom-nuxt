@@ -8,7 +8,7 @@
         </div>
         <Dialog
             :visible="displayAssignment"
-            :style="{width: '100%'}"
+            :style="{width: '100%', padding: '0 10%', boxShadow: 'none'}"
             :modal="true"
             @update:visible="changeAssignmentVisibility"
             @show="fetchAssignment"
@@ -107,10 +107,7 @@
                 if(assignment) {
                     attachments = assignment.attachments
                 }
-
-                await this.$store.commit(
-                    'attachments/SET_ITEMS', attachments,
-                )
+                await this.$store.commit('attachments/SET_ITEMS', attachments)
             }
         }
     }

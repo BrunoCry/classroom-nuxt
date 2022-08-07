@@ -33,14 +33,18 @@ export default {
             type: Boolean,
             default: false,
         },
+        attachmentsField: {
+            type: String,
+            default: '',
+        },
     },
     components: {
         Listbox,
     },
     computed: {
         ...mapGetters({
-            'attachments': 'attachments/items',
-        })
+            'attachments': 'attachments/items', 
+        }),
     },
     methods: {
         ...mapActions({
@@ -79,6 +83,6 @@ export default {
             this.$store.commit('attachments/SET_ITEMS', this.attachments.filter(e => e !== attachment))
             console.log(attachment, this.attachments)
         }
-    }
+    },
 }
 </script>

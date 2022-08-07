@@ -3,11 +3,9 @@
         <v-header />
         <sidebar />
         <div class="container p-5">
+          <Toast />
             <transition name="fade">
-                <div>
-                    <Toast />
-                    <Nuxt />
-                </div>
+              <Nuxt />
             </transition>
         </div>
     </div>

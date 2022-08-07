@@ -96,10 +96,12 @@
         }),
 
         async created() {
-            this.$store.dispatch('rooms/getRooms')
-            setTimeout(() => {
-                this.loading = false
-            }, 500)
+          // this.$store.dispatch('rooms/getRooms')
+          //   setTimeout(() => {
+          //       this.loading = false
+          //   }, 100)
+          await this.$store.dispatch('rooms/getRooms')
+          this.loading = false
         }
     }
 </script>
