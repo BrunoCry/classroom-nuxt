@@ -3,12 +3,12 @@
         <v-header />
         <sidebar />
         <div class="container pt-4">
-            <transition name="fade">
-                <div>
-                    <Toast />
+            <div>
+                <Toast />
+                <transition name="fade">
                     <Nuxt />
-                </div>
-            </transition>
+                </transition>
+            </div>
         </div>
     </div>
 </template>

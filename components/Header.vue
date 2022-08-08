@@ -17,9 +17,9 @@
                 </NuxtLink>
             </div>
             <div v-else class="right-header ml-auto">
-                <NuxtLink to="/login">
+                <!--<NuxtLink to="/login">
                     <Button class="mr-2 p-button-text py-2">{{ $t('header.sign-in') }}</Button>
-                </NuxtLink>
+                </NuxtLink>-->
                 <NuxtLink to="/registration">
                     <Button class="py-2">{{ $t('header.sign-up') }}</Button>
                 </NuxtLink>

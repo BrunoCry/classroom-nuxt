@@ -62,13 +62,13 @@
                                 </span>
                                 <span v-if="errors.password" class="error text-red-400">{{ errors.password }}</span>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-0">
                                 <span class="p-input-icon-left d-block w-full mb-1">
                                     <i class="pi pi-unlock" />
                                     <InputText type="password" v-model="form.repeat_password" :placeholder="$t('registration.placeholders.repeat-password')" class="w-full" />
                                 </span>
                             </div>
-                            <div class="mb-2">
+                            <div class="my-4">
                                 <div class="field-checkbox">
                                     <Checkbox id="acceptEULA" v-model="form.accept_eula" :binary="true"/>
                                     <label for="acceptEULA">{{ $t('registration.eula') }}</label>
@@ -79,6 +79,9 @@
                         </template>
                     </Card>
                 </div>
+                <NuxtLink to="/login">
+                    <Button class="p-button-text text-sm block w-full py-2 mt-3">Уже есть аккаунт? Авторизироваться</Button>
+                </NuxtLink>
             </div>
         </div>
     </div>

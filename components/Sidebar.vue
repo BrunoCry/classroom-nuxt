@@ -7,19 +7,19 @@
         <div class="sidebar-title uppercase text-center hidden lg:block text-xl">
             Class<b>Room</b>
         </div>
-        <div class="sidebar-content">
+        <div class="sidebar-content" @click.prevent="closeSidebar">
             <span class="sidebar-group-title">{{ $t('sidebar.group-title.navigation') }}</span>
-            <NuxtLink to="/">
+            <NuxtLink to="/" class="sidebar-link">
                 <i class="pi pi-home"></i>
                 <span>{{ $t('sidebar.links.dashboard') }}</span>
             </NuxtLink>
             <template v-if="user != undefined">
                 <span class="sidebar-group-title">{{ $t('sidebar.group-title.education') }}</span>
-                <NuxtLink to="/rooms">
+                <NuxtLink to="/rooms" class="sidebar-link">
                     <i class="pi pi-box"></i>
                     <span>{{ $t('sidebar.links.rooms') }}</span>
                 </NuxtLink>
-                <NuxtLink to="/dialogs">
+                <NuxtLink to="/dialogs" class="sidebar-link">
                     <i class="pi pi-comments"></i>
                     <span>{{ $t('sidebar.links.dialogs') }}</span>
                     <span class="msg-count">3 new</span>
@@ -27,21 +27,21 @@
             </template>
             <span class="sidebar-group-title">{{ $t('sidebar.group-title.profile') }}</span>
             <template v-if="user != undefined">
-                <NuxtLink to="/profile">
+                <NuxtLink to="/profile" class="sidebar-link">
                     <i class="pi pi-user"></i>
                     <span>{{ $t('sidebar.links.profile') }}</span>
                 </NuxtLink>
-                <a @click.prevent="logout" href="/home">
+                <a @click.prevent="logout" href="/home" class="sidebar-link">
                     <i class="pi pi-sign-out"></i>
                     <span>{{ $t('sidebar.links.logout') }}</span>
                 </a>
             </template>
             <template v-else>
-                <NuxtLink to="/login">
+                <NuxtLink to="/login" class="sidebar-link">
                     <i class="pi pi-sign-in"></i>
                     <span>{{ $t('sidebar.links.login') }}</span>
                 </NuxtLink>
-                <NuxtLink to="/registration">
+                <NuxtLink to="/registration" class="sidebar-link">
                     <i class="pi pi-user-plus"></i>
                     <span>{{ $t('sidebar.links.registration') }}</span>
                 </NuxtLink>
