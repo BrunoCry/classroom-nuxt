@@ -108,17 +108,12 @@
             }),
         },
 
-        async created () {
-            if (!this.$store.getters['users/checkAuth']) {
-                await this.$store.dispatch('users/getCurrentUser')
-            }
-            
+        async created () {     
             setTimeout(() => {
                     this.loading = false
-            }, 600)
+            }, 100)
 
             this.form = Object.assign({}, this.currentUser)
-            
         }
     }
 </script>

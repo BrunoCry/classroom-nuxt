@@ -38,10 +38,10 @@
 <script>
 import { mapGetters } from 'vuex'
 import AttachmentList from '@/components/attachments/AttachmentList.vue'
+import InputSwitch from 'primevue/inputswitch';
 import FileUpload from 'primevue/fileupload';
 import Badge from 'primevue/badge';
 import Button from 'primevue/button';
-import InputSwitch from 'primevue/inputswitch';
 import attachmentsCreate from '~/mixins/attachmentsCreate.js'
 
 
@@ -58,7 +58,7 @@ export default {
         }
     },
     async created() {
-        await this.$store.commit('attachments/SET_ITEMS', this.assignment.attachments || [])
+        //await this.$store.commit('attachments/SET_ITEMS', this.assignment.attachments || [])
     },
     computed: {
         ...mapGetters({

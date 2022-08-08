@@ -2,13 +2,11 @@
     <div class="page">
         <v-header />
         <sidebar />
+        <Toast />
         <div class="container pt-4">
-            <div>
-                <Toast />
-                <transition name="fade">
-                    <Nuxt />
-                </transition>
-            </div>
+            <transition name="fade">
+              <Nuxt />
+            </transition>
         </div>
     </div>
 </template>

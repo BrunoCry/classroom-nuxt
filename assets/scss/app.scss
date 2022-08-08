@@ -25,8 +25,11 @@ a {
     box-sizing: border-box;
 }
 
-.fade-enter-active, .fade-leave-active { transition: opacity .5s; }
+.fade-enter-active, .fade-leave-active { transition: opacity .5s ease; }
 .fade-enter, .fade-leave-active { opacity: 0; }
+
+.fade_mem-enter-active, .fade_mem-leave-active { transition: opacity .15s ease; }
+.fade_mem-enter, .fade_mem-leave-active { opacity: 0; }
 
 .sidebar {
     background-color:#141414;
@@ -189,4 +192,13 @@ input {
 
 .grid {
     margin: auto;
+}
+
+.header-footer {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.p-dialog-header-icons {
+  margin-bottom: 10%;
 }
