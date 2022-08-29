@@ -41,12 +41,12 @@ export const mutations = {
 }
 
 export const actions = {
-    async getRooms({ commit }) {
+    async getRooms({ commit }, currentPage=0) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
         
         try {
-            const response = await client.apis.room.getCurrentUserRooms({}, {
+            const response = await client.apis.room.getCurrentUserRooms({page: currentPage}, {
                 requestInterceptor: (request) => {
                     request.headers.Authorization = `Bearer ${accessToken}`
                 },

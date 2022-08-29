@@ -1,11 +1,11 @@
 <template>
     <div class="sidebar" :class="{ 'opened-sidebar': opened == true }">
         <div class="sidebar-title uppercase text-center flex align-items-center lg:hidden text-xl mx-5">
-            <span>Class<b>Room</b></span>
+            <span>Class<b>Space</b></span>
             <i @click.prevent="closeSidebar" class="pi pi-times close-sidebar"></i>
         </div>
         <div class="sidebar-title uppercase text-center hidden lg:block text-xl">
-            Class<b>Room</b>
+            Class<b>Space</b>
         </div>
         <div class="sidebar-content">
             <span class="sidebar-group-title">{{ $t('sidebar.group-title.navigation') }}</span>

@@ -6,7 +6,7 @@ export default {
     ssr: true,
 
     head: {
-        title: 'ClassRoom',
+        title: 'ClassSpace',
         htmlAttrs: {
             lang: 'en'
         },
@@ -41,7 +41,8 @@ export default {
     plugins: [
         'plugins/primevue',
         'plugins/nuxt-client-init',
-        'plugins/i18n'
+        'plugins/i18n',
+        {src: '@/plugins/date-format', mode: 'client'},
     ],
 
     components: true,

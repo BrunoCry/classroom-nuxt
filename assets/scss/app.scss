@@ -28,7 +28,7 @@ a {
 .fade-enter-active, .fade-leave-active { transition: opacity .5s ease; }
 .fade-enter, .fade-leave-active { opacity: 0; }
 
-.fade_mem-enter-active, .fade_mem-leave-active { transition: opacity .15s ease; }
+.fade_mem-enter-active, .fade_mem-leave-active { transition: opacity .25s ease; }
 .fade_mem-enter, .fade_mem-leave-active { opacity: 0; }
 
 .sidebar {
@@ -178,6 +178,7 @@ input {
     background:white;
     border-bottom:1px solid rgb(222, 222, 222);
     padding:1rem 0;
+    z-index: 100;
     @media (max-width: 992px) {
         left:0px;
     }

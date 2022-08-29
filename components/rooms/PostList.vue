@@ -17,7 +17,7 @@
                 </div>
                 <Divider />
                 <div class="flex align-items-center text-sm">
-                    <span class="time text-gray-500">{{ item.created_at }}</span>
+                    <span class="time text-gray-500">{{ new Date(item.created_at) | dateFormat('YYYY.MM.DD') }}</span>
                     <span class="files ml-auto">{{ item.attachments_count }} files attached</span>
                 </div>
             </div>

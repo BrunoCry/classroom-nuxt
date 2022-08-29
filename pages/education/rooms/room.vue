@@ -1,6 +1,6 @@
 <template>
     <div class="rooms-show">
-      <transition name="fade_mem" mode="out-in">
+      <transition name="fade" mode="out-in">
         <template v-if="loading">
             <div class="flex justify-content-center">
                 <ProgressSpinner />
