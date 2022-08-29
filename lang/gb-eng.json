@@ -60,7 +60,12 @@
         "eula": "Accept EULA",
         "button": "Sign up for free"
     },
-    "profile": {
-        
+    "recovery": {
+        "title": "Password recovery",
+        "description": "Enter your E-Mail. A link for password recovery will be sent to it.",
+        "placeholders": {
+            "email": "Your E-Mail"
+        },
+        "button": "Recover password"
     }
 }

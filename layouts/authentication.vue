@@ -1,7 +1,9 @@
 <template>
     <div class="auth-page">
         <Toast />
-        <Nuxt />
+        <transition name="fade">
+            <Nuxt />
+        </transition>
     </div>
 </template>
 

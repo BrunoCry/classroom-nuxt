@@ -3,7 +3,7 @@
         <template v-if="!loading">
             <h2 class="mt-0">Your profile info</h2>
             <div class="grid">
-                <div class="col-12 xl:col-5">
+                <div class="col-12 xl:col-8">
                     <div class="flex align-items-center mb-6">
                         <div class="mr-3 avatar_container">
                             <div @click="activateInput" class="img_container">

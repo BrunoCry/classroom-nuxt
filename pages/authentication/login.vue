@@ -29,17 +29,20 @@
                             <Divider align="center" type="dashed" class="text-sm">
                                 <b>{{ $t('login.dividers.password') }}</b>
                             </Divider>
-                            <span class="p-input-icon-left d-block w-full mb-3">
+                            <span class="p-input-icon-left d-block w-full mb-0">
                                 <i class="pi pi-lock" />
                                 <InputText type="password" v-model="form.password" :placeholder="$t('login.placeholders.password')" class="w-full" />
                             </span>
-                            <div class="field-checkbox">
+                            <div class="field-checkbox my-4">
                                 <Checkbox id="remember" v-model="form.remember" :binary="true" />
                                 <label for="remember">{{ $t('login.remember') }}</label>
                             </div>
                             <Button @click.prevent="loginUser()" :loading="loading" class="w-full text-center block">{{ $t('login.button') }}</Button>
                         </template>
                     </Card>
+                    <NuxtLink to="/recovery">
+                        <Button class="p-button-text text-sm block w-full py-2 mt-3">Забыли пароль?</Button>
+                    </NuxtLink>
                 </div>
             </div>
         </div>

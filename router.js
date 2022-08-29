@@ -9,6 +9,7 @@ const routes = [
     { path: '/', name: 'home', component: page('index.vue'),  meta: { requiresAuth: false } },
     { path: '/login', name: 'login', component: page('authentication/login.vue'),  meta: { requiresAuth: false } },
     { path: '/registration', name: 'registration', component: page('authentication/registration.vue'),  meta: { requiresAuth: false } },
+    { path: '/recovery', name: 'recovery', component: page('authentication/recovery.vue'), meta: { requiresAuth: false } },
     { path: '/rooms', component: page('education/rooms/layout.vue'), children: [
         { path: '/', name: 'rooms.list', component: page('education/rooms/list.vue'),  meta: { requiresAuth: true } },
         { path: 'create', name: 'rooms.create', component: page('education/rooms/create.vue'),  meta: { requiresAuth: true } },
