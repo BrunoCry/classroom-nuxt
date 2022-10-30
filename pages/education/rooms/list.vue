@@ -130,27 +130,14 @@
           }
           this.loading = false
         },
-        updated() {
-          //console.log(this.$route, this.$router)
-          // if(this.$route.meta.scrollPos.y) {
-          //   window.scrollTo(0, this.$route.meta.scrollPos.y)
-          // } offsetHeight
-          
-        },
         computed: {
           ...mapGetters({
             rooms: 'rooms/items',
-            //totalRoomsCount: 'rooms/totalRoomsCount'
           }),
           startItem() {
             return this.currentPage * this.rows
           }
         },
-
-        async created() {
-          //await this.$store.dispatch('rooms/getRooms') здесь должен быть эндпоинт на количество всех комнат
-          
-        }
     }
 </script>
 
@@ -161,7 +148,6 @@
 }
 
 .rooms-list {
-  min-height: 805px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -3,10 +3,11 @@ import { loadLocale } from '~/plugins/i18n'
 export default async ({ store, redirect, app, route, error }) => {
   const token = app.$cookies.get('token')
   const user = store.getters['users/checkAuth']
+  console.log(token, user)
   if(token && !user){
     await store.dispatch('users/getCurrentUser')
   }
-  if(!token && route.meta[0].requiresAuth === true) {
+  if(!token && route.meta[0].requiresAuth || route?.meta?.requiresAuth ) {
     return redirect('/login')
   }
   if(!token) {

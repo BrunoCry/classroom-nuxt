@@ -14,7 +14,7 @@
                             <div>
                                 <span class="p-input-icon-left d-block w-full mb-0">
                                     <i class="pi pi-inbox" />
-                                    <InputText type="text" v-model="form.email" :placeholder="$t('login.placeholders.email')" class="w-full" />
+                                    <InputText type="email" v-model="form.email" :placeholder="$t('login.placeholders.email')" class="w-full" />
                                 </span>
                             </div>
                             <Divider align="center" type="dashed" class="text-sm">

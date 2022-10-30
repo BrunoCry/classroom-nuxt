@@ -132,9 +132,9 @@
             
             async registrationUser() {
                 await this.registerUser(this.form)
-
-                if(Object.keys(this.errors).length == 0) {
-                    this.$router.push({ name: 'login' })
+                console.log(this.form)
+                if(!this.errors) {
+                  this.$router.push({ name: 'login' })
                 }
             }
         }

@@ -58,14 +58,13 @@ export const mutations = {
 export const actions = {
     async registerUser({ commit }, requestBody) {
         const client = await apiClient
-        console.log(requestBody.accept_eula)
 
         try {
             await client.apis.user.registerUser({}, { requestBody: requestBody })
             commit('SET_REGISTRATION_ERRORS', {})
         } catch (e) {
-            commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
-            console.error(e.response.body.detail)
+            //commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
+            console.error(e)
             return
         }
     },

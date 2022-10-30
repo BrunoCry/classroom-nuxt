@@ -49,7 +49,8 @@ export default {
 
     buildModules: [
         '@nuxtjs/router',
-        '@nuxtjs/axios'
+        '@nuxtjs/axios',
+        '@nuxtjs/moment',
     ],
 
     modules: [

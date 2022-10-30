@@ -10,7 +10,7 @@ const routes = [
     { path: '/login', name: 'login', component: page('authentication/login.vue'),  meta: { requiresAuth: false } },
     { path: '/registration', name: 'registration', component: page('authentication/registration.vue'),  meta: { requiresAuth: false } },
     { path: '/recovery', name: 'recovery', component: page('authentication/recovery.vue'), meta: { requiresAuth: false } },
-    { path: '/rooms', component: page('education/rooms/layout.vue'), children: [
+    { path: '/rooms', component: page('education/rooms/layout.vue'), meta: { requiresAuth: true }, children: [
         { path: '/', name: 'rooms.list', component: page('education/rooms/list.vue'),  meta: { requiresAuth: true } },
         { path: 'create', name: 'rooms.create', component: page('education/rooms/create.vue'),  meta: { requiresAuth: true } },
         { path: 'show/:id', name: 'rooms.show', component: page('education/rooms/room.vue'),  meta: { requiresAuth: true } },
@@ -24,12 +24,12 @@ const routes = [
         { path: ':roomId/assignments/:postId', component: page('education/rooms/layout.vue'), children: [
             { path: '', name: 'rooms.assignments.list', component: page('education/rooms/assignments/list.vue'),  meta: { requiresAuth: true } },
         ]},
-    ] },
-    { path: '/dialogs', component: page('education/dialogs/layout.vue'), children: [
-        { path: '/', name: 'dialogs.list', component: page('education/dialogs/preview.vue'),  meta: { requiresAuth: true } },
-        { path: 'show/:id', name: 'dialogs.view', component: page('education/dialogs/dialog.vue'),  meta: { requiresAuth: true } }
-    ] },
-    { path: '/profile', name: 'profile', component: page('profile/index.vue'),  meta: { requiresAuth: true } }
+    ]},
+    { path: '/profile', name: 'profile', component: page('profile/index.vue'),  meta: { requiresAuth: true } },
+    { path: '/dialogs', component: page('education/rooms/layout.vue'), meta: { requiresAuth: true }, children: [
+      { path: '/', name: 'last-messages', component: page('chat/DialogList.vue'),  meta: { requiresAuth: true } },
+      { path: '/dialogs/:dialogId', name: 'dialog', component: page('chat/Dialog.vue'),  meta: { requiresAuth: true } },
+    ]},
 ]
 
 export function createRouter () {
