@@ -6,7 +6,7 @@ export default async ({ store, redirect, app, route, error }) => {
   if(token && !user){
     await store.dispatch('users/getCurrentUser')
   }
-  if(!token && route.meta[0].requiresAuth === true) {
+  if(!token && route.meta[0].requiresAuth || route?.meta?.requiresAuth ) {
     return redirect('/login')
   }
   if(!token) {

@@ -21,6 +21,9 @@
             "registration": "Регистрация"
         }
     },
+    "messages": {
+        "showMore": "показать еще"
+    },
     "header": {
         "search": "Поиск...",
         "sign-in": "Войти",
