@@ -4,8 +4,9 @@ import Cookies from 'js-cookie'
 export const namespaced = true;
 
 export const state = () => ({
-    lastMessages: null,
-    lastMessage: null,
+    lastMessages: [],
+    diaogMessages: [],
+    dialog: null,
     errors: {},
     current: null,
     dialog: {},
@@ -18,14 +19,20 @@ export const getters = {
     lastMessages(state) {
       return state.lastMessages
     },
-    lastMessage(state) {
-      return state.lastMessage
+    diaogMessages(state) {
+      return state.diaogMessages
+    },
+    dialog(state) {
+      return state.dialog
     },
     items(state) {
         return state.items
     },
     current(state) {
         return state.current
+    },
+    errors(state) {
+      return state.errors
     }
 }
 
@@ -39,8 +46,14 @@ export const mutations = {
     SET_LAST_MESSAGES(state, lastMessages) {
       state.lastMessages = lastMessages
     },
-    SET_LAST_MESSAGE(state, lastMessage) {
-      state.lastMessage = lastMessage
+    SET_LAST_MESSAGE(state, dialog) {
+      state.dialog = dialog
+    },
+    PUSH_DIALOG_MESSAGE(state, diaogMessages) {
+      state.diaogMessages.push(diaogMessages)
+    },
+    UNSHIFT_DIALOG_MESSAGES(state, diaogMessages) {
+      state.diaogMessages.unshift(...diaogMessages)
     },
     SET_ERRORS(state, items) {
         state.errors = items
@@ -92,7 +105,6 @@ export const actions = {
   async getDialogDetail({commit}, requestBody) {
     const client = await apiClient
     const accessToken = this.$cookies.get('token')
-
     try {
       const response = await client.apis.chat.getDialogDetail(
         {dialog_id: requestBody},
@@ -105,7 +117,26 @@ export const actions = {
       commit('SET_ERRORS', {})
 
     } catch (e) {
-      console.error(e?.response?.body)
+      console.error(e)
+      commit('SET_ERRORS', e.response.body.detail)
+    }
+  },
+  async loadMessages({commit}, requestBody) {
+    const client = await apiClient
+    const accessToken = this.$cookies.get('token')
+    try {
+      const response = await client.apis.chat.getMessages(
+        requestBody,
+        {
+          requestInterceptor: (request) => {
+            request.headers.Authorization = `Bearer ${accessToken}`
+          },
+        })
+        console.log(response.body)
+      commit('UNSHIFT_DIALOG_MESSAGES', response.body)
+      //commit('SET_ERRORS', {})
+    } catch (e) {
+      console.error(e.response.body.detail)
       commit('SET_ERRORS', e.response.body.detail)
     }
   }

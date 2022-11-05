@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-column dialog-container ">
-    <MessagesList :messages="messages" />
+  <div class="flex flex-column dialog-container">
+    <MessagesList />
     <div class="flex align-items-center input-message-container" >
       <InputText class="message-input" type="text" v-model="messageText" id="" @keyup.enter="sendMessage($event)" />
       <label for="text" class="file-label">
@@ -31,17 +31,13 @@ export default {
             const dialogId = this.$route.params.dialogId
             const token = this.$store.getters['users/token']
 
-            const socket = new WebSocket(WS_URL + `/api/v1/chat/?jwt_token=${token}&dialog_id=${dialogId}`)
-            socket.onmessage = (message) => { this.messages.push(JSON.parse(message.data)) }
+            const socket = new WebSocket(WS_URL + `api/v1/chat/?jwt_token=${token}&dialog_id=${dialogId}&limit=10`)
+            socket.onmessage = (message) => { this.$store.commit('chat/PUSH_DIALOG_MESSAGE', JSON.parse(message.data))}
             this.socket = socket;
         }
         
     },
     async mounted() {
-      await setTimeout( () => {
-        this.isNotLoadMessages = true
-      },400)
-      
     },
     watch: {
     },

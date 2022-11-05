@@ -21,6 +21,9 @@
             "registration": "Registration"
         }
     },
+    "messages": {
+        "showMore": "show more"
+    },
     "header": {
         "search": "Search...",
         "sign-in": "Log in",
