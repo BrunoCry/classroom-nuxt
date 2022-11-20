@@ -1,8 +1,8 @@
 <template>
   <div>
     <header class="flex align-items-center">
-      <Avatar :image="dialog?.author?.profile_picture_path" shape="circle" class="mr-2" />
-      <h2> {{dialog?.author?.full_name}}</h2>
+      <Avatar :image="dialog.author.profile_picture_path" shape="circle" class="mr-2" />
+      <h2> {{dialog.author.full_name}}</h2>
     </header>
     <Divider />
     <main class="dialog-main" ref="block">

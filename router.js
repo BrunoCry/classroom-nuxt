@@ -10,6 +10,7 @@ const routes = [
     { path: '/login', name: 'login', component: page('authentication/login.vue'),  meta: { requiresAuth: false } },
     { path: '/registration', name: 'registration', component: page('authentication/registration.vue'),  meta: { requiresAuth: false } },
     { path: '/recovery', name: 'recovery', component: page('authentication/recovery.vue'), meta: { requiresAuth: false } },
+    { path: '/reset-password/:token', name: 'reset-password', component: page('authentication/ResetPassword.vue'), meta: { requiresAuth: false } },
     { path: '/rooms', component: page('education/rooms/layout.vue'), meta: { requiresAuth: true }, children: [
         { path: '/', name: 'rooms.list', component: page('education/rooms/list.vue'),  meta: { requiresAuth: true } },
         { path: 'create', name: 'rooms.create', component: page('education/rooms/create.vue'),  meta: { requiresAuth: true } },

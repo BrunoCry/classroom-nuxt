@@ -67,8 +67,15 @@
         "title": "Password recovery",
         "description": "Enter your E-Mail. A link for password recovery will be sent to it.",
         "placeholders": {
-            "email": "Your E-Mail"
+            "email": "Your E-Mail",
+            "password": "Your new password",
+            "repeatPassword": "Repeat new password"
         },
-        "button": "Recover password"
+        "button": "Recover password",
+        "cancelText": "Cancel password recovery",
+        "resetTitle": "Reset your password",
+        "passwordDescription": "Enter your new password",
+        "resetPasswordDescription": "Repeat your new password",
+        "resetButton": "Accept"
     }
 }

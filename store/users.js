@@ -63,9 +63,7 @@ export const actions = {
             await client.apis.user.registerUser({}, { requestBody: requestBody })
             commit('SET_REGISTRATION_ERRORS', {})
         } catch (e) {
-            //commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
-            console.error(e)
-            return
+            commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
         }
     },
 
@@ -135,5 +133,21 @@ export const actions = {
     logoutUser({ commit }) {
       this.$cookies.remove('token')
         commit('LOGOUT_USER')
-    }
+    },
+    async resetPassword({ commit, state }, { token, data }) {
+        const client = await apiClient
+        const accessToken = this.$cookies.get('token')
+        
+        try {
+            await client.apis.user.resetUserPassword({token: token}, {
+                requestInterceptor: (request) => {
+                    request.headers.Authorization = `Bearer ${accessToken}`
+                },
+                requestBody: data,
+            })
+            commit('SET_REGISTRATION_ERRORS', {})
+        } catch (e) {
+            commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
+        }
+    },
 }

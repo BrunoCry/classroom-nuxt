@@ -70,8 +70,15 @@
         "description_complete_1": "На Вашу почту",
         "description_complete_2": "было выслано письмо с ссылкой на восстановление пароля.",
         "placeholders": {
-            "email": "Ваш E-Mail"
+            "email": "Your E-Mail",
+            "password": "Новый пароль",
+            "repeatPassword": "Повторите пароль"
         },
-        "button": "Восстановить пароль"
+        "button": "Восстановить",
+        "cancelText": "Отменить и вернуться на главную",
+        "resetTitle": "Установить новый пароль",
+        "passwordDescription": "Введите ваш новый пароль",
+        "resetPasswordDescription": "Повторите новый пароль",
+        "resetButton": "Продолжить"
     }
 }

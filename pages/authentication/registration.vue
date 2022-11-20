@@ -14,6 +14,7 @@
                             <Divider align="center" type="dashed" class="text-sm">
                                 <b>{{ $t('registration.dividers.credentials') }}</b>
                             </Divider>
+                            {{ errors }}
                             <div class="mb-3">
                                 <span class="p-input-icon-left d-block w-full mb-1">
                                     <i class="pi pi-inbox" />
@@ -133,8 +134,14 @@
             async registrationUser() {
                 await this.registerUser(this.form)
                 console.log(this.form)
-                if(!this.errors) {
-                  this.$router.push({ name: 'login' })
+                if(Object.keys(this.errors).length === 0) {
+                    this.$router.push({ name: 'login' })
+                    this.$toast.add({
+                        severity: 'success',
+                        summary: "Registration success!",
+                        detail: "Check out your email to activate your profile.",
+                        life: 3000
+                    })
                 }
             }
         }
