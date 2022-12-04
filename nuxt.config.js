@@ -43,7 +43,6 @@ export default {
         'plugins/nuxt-client-init',
         'plugins/i18n',
         {src: '@/plugins/date-format', mode: 'client'},
-        {src: '@/plugins/fcm', mode: 'client'},
     ],
 
     components: true,

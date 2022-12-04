@@ -14,7 +14,6 @@
                             <Divider align="center" type="dashed" class="text-sm">
                                 <b>{{ $t('registration.dividers.credentials') }}</b>
                             </Divider>
-                            {{ errors }}
                             <div class="mb-3">
                                 <span class="p-input-icon-left d-block w-full mb-1">
                                     <i class="pi pi-inbox" />

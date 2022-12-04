@@ -64,7 +64,6 @@ import Divider from 'primevue/divider';
 import ProgressSpinner from 'primevue/progressspinner';
 import Button from 'primevue/button';
 import { getAuth, signInAnonymously } from 'firebase/auth'
-import { messaging } from '@/plugins/fcm'
 import { getToken } from '@firebase/messaging';
 
 
@@ -118,13 +117,7 @@ export default {
             this.activatePushNotifications()
         },
         async activatePushNotifications() {
-            const token = await getToken(messaging, {
-                vapidKey: 'BCpWj2jYGivK-Tz7S9xm7XNxUBIe1gY8RN_O6Og55-hrQK0dL-qcUodRZe6gTVAAo0s45QGCjRnuR_nibscl8D8'
-            })
-
-            if(token) {
-                console.log(token)
-            }
+           alert('coming soon!')
         }
     },
     computed: {
