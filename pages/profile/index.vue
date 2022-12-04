@@ -31,6 +31,12 @@
                     <InputText id="first_name" v-model="form.middle_name" class="block w-full mb-4" />
                     <label for="first_name" class="mb-1 block">Last name</label>
                     <InputText id="first_name" v-model="form.last_name" class="block w-full mb-5" />
+                    
+                    <Divider align="left" type="dashed">
+                        Notifications
+                    </Divider>
+                    <Button @click.prevent="requestPushNotifications">Allow push notifications</Button>
+                    
                     <Divider align="left" type="dashed">
                         Credentials
                     </Divider>
@@ -51,71 +57,91 @@
 </template>
 
 <script>
-    import { mapGetters, mapActions } from 'vuex';
-    import Avatar from 'primevue/avatar';
-    import InputText from 'primevue/inputtext';
-    import Divider from 'primevue/divider';
-    import ProgressSpinner from 'primevue/progressspinner';
-    import Button from 'primevue/button';
+import { mapGetters, mapActions } from 'vuex';
+import Avatar from 'primevue/avatar';
+import InputText from 'primevue/inputtext';
+import Divider from 'primevue/divider';
+import ProgressSpinner from 'primevue/progressspinner';
+import Button from 'primevue/button';
+import { getAuth, signInAnonymously } from 'firebase/auth'
+import { messaging } from '@/plugins/fcm'
+import { getToken } from '@firebase/messaging';
 
-    export default {
-        components: {
-            Avatar, InputText, Divider, ProgressSpinner, Button
-        },
-        data () {
-            return {
-                form: {
-                    first_name: '',
-                    last_name: '',
-                    middleName: '',
-                    confirm_password: '',
-                    phone_number: '',
-                    email: '',
-                    password: '',
-                    repeat_password: '',
-                },
-                loading: true,
-                uploadAvatar: {},
-                isMousOnAvatar: false
-            }
-        },
-        methods: {
-            ...mapActions({
-                getCurrentUser: 'users/getCurrentUser',
-                updateUser: 'users/updateUser',
-                updateUserAvatar: 'users/updateAvatar',
-                
-            }),
-            async updateProfile() {
-                const requestBody = this.form
-                await this.updateUser(requestBody)
-            },
-            async updateUser() {
-                await this.$store.dispatch('users/getCurrentUser')
-            },
-            activateInput() {
-                document.getElementById('chooser_avatar').click()
-            },
-            async sendAvatarToServer() {
-                this.uploadAvatar = this.$refs.fileAvatar.files[0];
-                this.updateUserAvatar({profile_picture: this.uploadAvatar})
-            },
-        },
-        computed: {
-            ...mapGetters({
-                currentUser: 'users/currentUser',
-                updateErrors: 'users/registrationErrors',
-            }),
-        },
 
-        async created () {     
-            setTimeout(() => {
-                    this.loading = false
-            }, 100)
-
-            this.form = Object.assign({}, this.currentUser)
+export default {
+    components: {
+        Avatar, InputText, Divider,
+        ProgressSpinner, Button,
+    },
+    data () {
+        return {
+            form: {
+                first_name: '',
+                last_name: '',
+                middleName: '',
+                confirm_password: '',
+                phone_number: '',
+                email: '',
+                password: '',
+                repeat_password: '',
+            },
+            loading: true,
+            uploadAvatar: {},
+            isMousOnAvatar: false,
+            allowPushNotifications: false,
+            isNotificationsEnbaled: false,
         }
+    },
+    methods: {
+        ...mapActions({
+            getCurrentUser: 'users/getCurrentUser',
+            updateUser: 'users/updateUser',
+            updateUserAvatar: 'users/updateAvatar',
+            
+        }),
+        async updateProfile() {
+            const requestBody = this.form
+            await this.updateUser(requestBody)
+        },
+        async updateUser() {
+            await this.$store.dispatch('users/getCurrentUser')
+        },
+        activateInput() {
+            document.getElementById('chooser_avatar').click()
+        },
+        async sendAvatarToServer() {
+            this.uploadAvatar = this.$refs.fileAvatar.files[0];
+            this.updateUserAvatar({profile_picture: this.uploadAvatar})
+        },
+        async requestPushNotifications() {
+            await signInAnonymously(getAuth())
+            this.activatePushNotifications()
+        },
+        async activatePushNotifications() {
+            const token = await getToken(messaging, {
+                vapidKey: 'BCpWj2jYGivK-Tz7S9xm7XNxUBIe1gY8RN_O6Og55-hrQK0dL-qcUodRZe6gTVAAo0s45QGCjRnuR_nibscl8D8'
+            })
+
+            if(token) {
+                console.log(token)
+            }
+        }
+    },
+    computed: {
+        ...mapGetters({
+            currentUser: 'users/currentUser',
+            updateErrors: 'users/registrationErrors',
+        }),
+    },
+
+    async created () {     
+        setTimeout(() => {
+                this.loading = false
+        }, 100)
+
+        this.form = Object.assign({}, this.currentUser)
     }
+}
 </script>
 
 <style scoped>
@@ -123,6 +149,12 @@
     width: 0;
     height: 0;
 }
+
+
+/* .inputSwitch {
+    height: 1rem;
+    width: 3rem;
+} */
 
 .img_container {
     display: flex;
