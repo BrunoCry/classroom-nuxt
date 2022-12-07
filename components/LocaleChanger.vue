@@ -32,7 +32,7 @@
                 locale: null,
                 locales: [
                     { name: "Русский", code: 'ru' },
-                    { name: "English", code: 'gb-eng' }
+                    { name: "English", code: 'gb' }
                 ]
             }
         },

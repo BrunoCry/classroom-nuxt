@@ -4,19 +4,19 @@ import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 
 const i18n = new VueI18n({
-    locale: 'gb-eng',
+    locale: 'gb',
     messages: {}
 })
 
 export default async ({ app, store }) => {
     if (process.client) {
-        await loadLocale(app.$cookies.get('locale') || 'gb-eng')
+        await loadLocale(app.$cookies.get('locale') || 'ru')
     }
   
     app.i18n = i18n
 }
 
-export async function loadLocale(locale = 'gb-eng') {
+export async function loadLocale(locale = 'gb') {
     if (Object.keys(i18n.getLocaleMessage(locale)).length === 0) {
         const messages = await import(`~/lang/${locale}`)
         i18n.setLocaleMessage(locale, messages)
