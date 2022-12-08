@@ -1,5 +1,3 @@
-import { loadLocale } from '~/plugins/i18n'
-
 export default async ({ store, redirect, app, route, error }) => {
   const token = app.$cookies.get('token')
   const user = store.getters['users/checkAuth']
