@@ -1,5 +1,3 @@
-import checkAuth from './middleware/check-auth'
-
 require('dotenv').config()
 
 export default {
