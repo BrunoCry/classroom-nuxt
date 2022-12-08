@@ -35,7 +35,7 @@ export default {
     ],
 
     router: {
-        middleware: ['locale', 'check-auth']
+        middleware: ['locale']
     },
 
     plugins: [
