@@ -22,8 +22,8 @@ export default {
   },
   computed: {
     avatars() {
-      return this.message.dialog.participants.map(participant => {
-        return participant.profile_picture_path
+      return this.message?.dialog?.participants?.map(participant => {
+        return participant?.profile_picture_path
       })
     }
   },
