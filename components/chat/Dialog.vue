@@ -31,7 +31,7 @@ export default {
             const dialogId = this.$route.params.dialogId
             const token = this.$store.getters['users/token']
 
-            const socket = new WebSocket(WS_URL + `api/v1/chat/?jwt_token=${token}&dialog_id=${dialogId}&limit=10`)
+            const socket = new WebSocket(WS_URL + `api/v1/chat/?jwt_token=${token}&dialog_id=${dialogId}&limit=20`)
             socket.onmessage = (message) => { this.$store.commit('chat/PUSH_DIALOG_MESSAGE', JSON.parse(message.data))}
             this.socket = socket;
         }

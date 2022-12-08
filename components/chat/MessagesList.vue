@@ -27,7 +27,6 @@ export default {
   mounted(){
     this.$refs.messageWrapper.style.opacity = 0
     //setInterval(() => {console.log(this.$refs.messageWrapper?.scrollTop)}, 500)
-    console.log(this.errors)
   },
   computed: {
     ...mapGetters({
