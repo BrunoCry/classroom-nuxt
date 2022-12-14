@@ -1,5 +1,6 @@
 <template>
     <div class="rooms-show">
+      <transition name="fade_mem" mode="out-in">
         <template v-if="loading">
             <div class="flex justify-content-center">
                 <ProgressSpinner />
@@ -8,6 +9,7 @@
         <template v-else>
             <PostDetail />
         </template>
+      </transition>
     </div>
 </template>
 
@@ -38,9 +40,7 @@
 
             await this.$store.commit('attachments/SET_ITEMS', post.attachments)
 
-            setTimeout(() => {
-                this.loading = false
-            }, 800)
+            this.loading = false
         }
     }
 </script>

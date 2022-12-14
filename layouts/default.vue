@@ -2,12 +2,10 @@
     <div class="page">
         <v-header />
         <sidebar />
-        <div class="container p-5">
-            <transition name="fade">
-                <div>
-                    <Toast />
-                    <Nuxt />
-                </div>
+        <Toast />
+        <div class="container pt-4">
+            <transition name="fade" mode="out-in" appear>
+              <Nuxt />
             </transition>
         </div>
     </div>
@@ -20,7 +18,7 @@ import VHeader from '@/components/Header.vue'
 
 export default {
     components: {
-        Sidebar, Toast, VHeader
+        Sidebar, Toast, VHeader,
     },
 
     name: 'DefaultLayout'

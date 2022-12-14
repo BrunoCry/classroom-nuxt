@@ -1,5 +1,6 @@
 <template>
     <div class="rooms-show">
+      <transition name="fade" mode="out-in">
         <template v-if="loading">
             <div class="flex justify-content-center">
                 <ProgressSpinner />
@@ -8,11 +9,12 @@
         <template v-else>
             <RoomDetails />
         </template>
+      </transition>
     </div>
 </template>
 
 <script>
-    import RoomDetails from '../../../components/rooms/RoomDetails.vue';
+    import RoomDetails from '@/components/rooms/RoomDetails.vue';
     import ProgressSpinner from 'primevue/progressspinner';
 
     export default {
@@ -32,10 +34,7 @@
             await this.$store.dispatch('users/getCurrentUser')
             await this.$store.dispatch('roomposts/fetch', roomId)
             await this.$store.dispatch('participants/current', roomId)
-
-            setTimeout(() => {
-                this.loading = false
-            }, 800)
+            this.loading = false
         }
     }
 </script>

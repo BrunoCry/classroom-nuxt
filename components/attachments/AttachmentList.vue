@@ -2,9 +2,7 @@
 <div class="attachments-list">
     <Listbox
         :options="attachments"
-        :filter="true"
         listStyle="max-height:250px"
-        style="width:19em"
         @change="changeItem"
     >   
         <template
@@ -25,9 +23,9 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import Listbox from 'primevue/listbox';
-import {downloadFromBlob} from '@/utils/utils.js'
+import { mapGetters, mapActions } from 'vuex'
+import Listbox from 'primevue/listbox'
+import { downloadFromBlob } from '@/utils/utils.js'
 
 export default {
     props: {
@@ -35,14 +33,18 @@ export default {
             type: Boolean,
             default: false,
         },
+        attachmentsField: {
+            type: String,
+            default: '',
+        },
     },
     components: {
         Listbox,
     },
     computed: {
         ...mapGetters({
-            'attachments': 'attachments/items',
-        })
+            'attachments': 'attachments/items', 
+        }),
     },
     methods: {
         ...mapActions({
@@ -58,6 +60,17 @@ export default {
         },
         async download(option) {
             const attachment = option.value
+
+            if(!attachment.id) {
+                this.$toast.add({
+                    severity: 'error',
+                    summary: "Can't download attachment",
+                    detail: "The attached file isn't uploaded!",
+                    life: 3000
+                })
+                return
+            }
+
             await this.getAttachment(attachment.id)
             return downloadFromBlob(this.$store.getters['attachments/item'], attachment.filename)
         },
@@ -70,6 +83,6 @@ export default {
             this.$store.commit('attachments/SET_ITEMS', this.attachments.filter(e => e !== attachment))
             console.log(attachment, this.attachments)
         }
-    }
+    },
 }
 </script>

@@ -6,6 +6,20 @@
             </NuxtLink>
             <h2 class="my-0">{{ post.title }}</h2>
         </div>
+        <Dialog
+            :visible="displayAssignment"
+            :style="{width: '100%', padding: '0 10%', boxShadow: 'none'}"
+            :modal="true"
+            @update:visible="changeAssignmentVisibility"
+            @show="fetchAssignment"
+        >
+            <template #header>
+                <h3>
+                    {{ post.title + $t(` assignment` )}}
+                </h3>
+            </template>
+            <AssignmentCreate />
+        </Dialog>
         <div class="grid">
             <div class="col-12 xl:col-8">
                 <span class="text-sm mb-1 mt-3 block">Description:</span>
@@ -21,8 +35,9 @@
                     <Button
                         v-else-if="currentParticipation.can_assign_homeworks"
                         class="p-button-outlined"
+                        @click="changeAssignmentVisibility"
                     >
-                        Assign
+                        Assignment
                     </Button>
                 </div>
                 <Divider />
@@ -30,7 +45,7 @@
             </div>
             <div class="col-12 xl:col-4">
                 <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
-                    <h3 class="my-0">Attached files</h3>
+                    <h3 class="mt-0 mb-3">Attached files</h3>
                     <AttachmentList />
                     <Divider />
                 </div>
@@ -44,11 +59,21 @@
     import Button from 'primevue/button';
     import Divider from 'primevue/divider';
     import InputText from 'primevue/inputtext';
+    import Dialog from 'primevue/dialog';
+
+    import AssignmentCreate from '@/components/assignments/AssignmentCreate.vue'
     import AttachmentList from '@/components/attachments/AttachmentList.vue'
+
 
     export default {
         components: {
             Button, Divider, InputText, AttachmentList,
+            Dialog, AssignmentCreate,
+        },
+        data() {
+            return {
+                showAssignment: false,
+            }
         },
         computed: {
             ...mapGetters({
@@ -57,12 +82,32 @@
                 currentParticipation: 'participants/current',
                 post: 'roomposts/item',
             }),
+            displayAssignment() {
+                return this.showAssignment
+            }
         },
         methods: {
             async goToPostAssignmentsList() {
                 this.$router.push({'name': 'rooms.assignments.list', query: {
                     postId: this.post.id
                 }})
+            },
+            async changeAssignmentVisibility() {
+                this.showAssignment = !this.showAssignment
+
+                if(!this.showAssignment)
+                    await this.$store.commit('attachments/SET_ITEMS', this.post.attachments)
+            },
+            async fetchAssignment() {
+                await this.$store.dispatch('assignments/myInPost', this.post.id)
+
+                const assignment = this.$store.getters['assignments/item']
+                let attachments = []
+
+                if(assignment) {
+                    attachments = assignment.attachments
+                }
+                await this.$store.commit('attachments/SET_ITEMS', attachments)
             }
         }
     }

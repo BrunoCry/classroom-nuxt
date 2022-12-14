@@ -1,45 +1,49 @@
 <template>
-    <div class="sidebar">
-        <div class="sidebar-title uppercase text-center block text-xl">
-            Class<b>Room</b>
+    <div class="sidebar" :class="{ 'opened-sidebar': opened == true }">
+        <div class="sidebar-title uppercase text-center flex align-items-center lg:hidden text-xl mx-5">
+            <span>Class<b>Space</b></span>
+            <i @click.prevent="closeSidebar" class="pi pi-times close-sidebar"></i>
         </div>
-        <div class="sidebar-content">
-            <span class="sidebar-group-title">Navigation</span>
-            <NuxtLink to="/">
+        <div class="sidebar-title uppercase text-center hidden lg:block text-xl">
+            Class<b>Space</b>
+        </div>
+        <div class="sidebar-content" @click.prevent="closeSidebar">
+            <span class="sidebar-group-title">{{ $t('sidebar.group-title.navigation') }}</span>
+            <NuxtLink to="/" class="sidebar-link">
                 <i class="pi pi-home"></i>
-                <span>Dashboard</span>
+                <span>{{ $t('sidebar.links.dashboard') }}</span>
             </NuxtLink>
             <template v-if="user != undefined">
-                <span class="sidebar-group-title">Education</span>
-                <NuxtLink to="/rooms">
+                <span class="sidebar-group-title">{{ $t('sidebar.group-title.education') }}</span>
+                <NuxtLink to="/rooms" class="sidebar-link">
                     <i class="pi pi-box"></i>
-                    <span>Rooms</span>
+                    <span>{{ $t('sidebar.links.rooms') }}</span>
                 </NuxtLink>
-                <NuxtLink to="/dialogs">
+                <NuxtLink to="/dialogs" class="sidebar-link">
                     <i class="pi pi-comments"></i>
-                    <span>Dialogs</span>
+                    <span>{{ $t('sidebar.links.dialogs') }}</span>
                     <span class="msg-count">3 new</span>
                 </NuxtLink>
             </template>
-            <span class="sidebar-group-title">My profile</span>
+            <span class="sidebar-group-title">{{ $t('sidebar.group-title.profile') }}</span>
             <template v-if="user != undefined">
-                <NuxtLink to="/profile">
+                <NuxtLink to="/profile" class="sidebar-link">
                     <i class="pi pi-user"></i>
-                    <span>My profile</span>
+                    <span>{{ $t('sidebar.links.profile') }}</span>
                 </NuxtLink>
-                <a @click.prevent="logout" href="/home">
+                <a @click.prevent="logout" href="/home" class="sidebar-link">
                     <i class="pi pi-sign-out"></i>
-                    <span>Log out</span>
+                    <span>{{ $t('sidebar.links.logout') }}</span>
                 </a>
             </template>
             <template v-else>
-                <NuxtLink to="/login">
+                <NuxtLink to="/login" class="sidebar-link">
                     <i class="pi pi-sign-in"></i>
-                    <span>Log in</span>
+                    <span>{{ $t('sidebar.links.login') }}</span>
                 </NuxtLink>
-                <NuxtLink to="/registration">
+                <NuxtLink to="/registration" class="sidebar-link">
                     <i class="pi pi-user-plus"></i>
-                    <span>Registration</span>
+                    <span>{{ $t('sidebar.links.registration') }}</span>
                 </NuxtLink>
             </template>
         </div>
@@ -60,13 +64,15 @@
 
         computed: {
             ...mapGetters({
-                user: 'users/currentUser'
+                user: 'users/currentUser',
+                opened: 'sidebar/opened'
             })
         },
 
         methods: {
             ...mapActions({
-                logout_user: 'users/logoutUser'
+                logout_user: 'users/logoutUser',
+                closeSidebar: 'sidebar/closeSidebar'
             }),
 
             async logout() {

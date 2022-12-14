@@ -1,5 +1,5 @@
 <template>
-    <Dialog v-model:visible="modal" :modal="true" :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '50vw'}">
+    <Dialog v-model="modal" :modal="true" :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '50vw'}">
         <p>123123</p>
         <template #footer>
             123
@@ -16,9 +16,8 @@
         },
 
         name: 'CreateRoomComponent',
-
+        //model:visible="modal" конструкция на которую ругался анализатор
         components: { Dialog },
-
         data () {
             return {
                 modal: true

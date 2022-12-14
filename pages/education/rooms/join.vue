@@ -1,6 +1,7 @@
 <template>
     <div class="room-join">
-        123
+        <h2>You are joined the room</h2>
+        <p>Redirecting to room list...</p>
     </div>
 </template>
 
@@ -18,6 +19,7 @@
             } catch (e) {
                 console.error(e.response)
             }
+            this.$router.push({ name: 'rooms.list' })
         }
     }
 </script>

@@ -4,10 +4,9 @@ export default {
     srcDir: __dirname,
 
     ssr: true,
-    target: 'server',
 
     head: {
-        title: 'ClassRoom',
+        title: 'ClassSpace',
         htmlAttrs: {
             lang: 'en'
         },
@@ -36,24 +35,38 @@ export default {
     ],
 
     router: {
-        middleware: ['check-auth']
+        middleware: ['locale', 'check-auth']
     },
 
     plugins: [
         'plugins/primevue',
-        'plugins/i18n'
+        'plugins/nuxt-client-init',
+        'plugins/i18n',
+        {src: '@/plugins/date-format', mode: 'client'},
     ],
 
     components: true,
 
     buildModules: [
         '@nuxtjs/router',
-        '@nuxtjs/axios'
+        '@nuxtjs/axios',
+        '@nuxtjs/moment',
     ],
 
     modules: [
-        //'primevue/nuxt'
+        'nuxt-clipboard',
+        ['nuxt-clipboard', { autoSetContainer: true }],
+        
+        'cookie-universal-nuxt',
+        ['cookie-universal-nuxt', { alias: 'cookies' }],
+
+        '@nuxtjs/dotenv',
+        ['@nuxtjs/dotenv', {}]
     ],
+
+    clipboard: {
+        autoSetContainer: true
+    },
 
     build: {
         transpile: ['primevue'],
@@ -61,7 +74,7 @@ export default {
 
     // настройка сервера для запуска nuxt в локальной сети, убрать на деплое
     server: {
-        port: 8000,  
-        host: '0.0.0.0'
+        host: process.env.NUXT_HOST || 'localhost',
+        port: process.env.NUXT_PORT || '3000',
     }
 }

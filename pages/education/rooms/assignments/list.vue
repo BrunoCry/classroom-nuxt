@@ -1,5 +1,6 @@
 <template>
     <div class="rooms-show">
+      <transition name="fade_Mem" mode="out-in">
         <template v-if="loading">
             <div class="flex justify-content-center">
                 <ProgressSpinner />
@@ -8,6 +9,7 @@
         <template v-else>
             <AssignmentsList />
         </template>
+      </transition>
     </div>
 </template>
 
@@ -31,11 +33,7 @@
 
             await this.$store.dispatch('assignments/fetch', this.$route.query)
             await this.$store.dispatch('participants/current', roomId)
-            await this.$store.dispatch('users/getCurrentUser')
-
-            setTimeout(() => {
-                this.loading = false
-            }, 800)
+            this.loading = false
         }
     }
 </script>

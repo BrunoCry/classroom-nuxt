@@ -5,8 +5,8 @@ export const namespaced = true
 export const state = () => ({
     locale: 'ru',
     locales: {
-        ru: 'ru',
-        en: 'en'
+        ru: 'Русский',
+        'gb': 'English'
     }
 })
 
